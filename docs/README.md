@@ -1,0 +1,11 @@
+# How To Build A Brain
+
+**Summary**: A five two-hour workshop introduction to the brain-inspired nature of artificial intelligence (AI), ending with a discussion of moral and ethical issues. This course has been designed as an option for final-year psychology undergraduates, and hence assumes no prior knowledge of AI (or maths beyond GCSE). 
+
+## Course outline
+
+Machines have now taught themselves to beat humans at playing many games, including those considered to involve skill (classic video games) or intelligence (Chess, Go, Jeopardy). At the same time, these machines pretty much suck at apparently simple tasks like classifying everyday objects (“It’s a cat”) or walking. In many cases, the design of these machines is inspired by the structure of the human brain. In understanding this area more fully, we hope to better understand ourselves, and to be better able to specify what it means to be human, beyond those aspects of our abilities that can now be automated. It also raises deep philosophical and ethical questions about the future of the human race as we increasingly move from automating manual labour to automating intellectual labour. 
+
+In this series of five two-hour workshops, we’ll trace the origins of how psychology and neuroscience have informed artificial intelligence, focussing on major breakthroughs from early beginnings in the 1940s, through a second wave of research in the 1980s and 90s, and to the recent dramatic achievements in brain-inspired AI in the last decade. We’ll also consider the ethical and philosophical issues these advancements raise. I’ll use a number of complementary teaching techniques, including activities, demonstrations, discussions, and recommended self-study materials (including videos as well as more traditional sources such as journal articles). 
+
+If you’d like to know more about these topics, a great place to start would be to watch the award-winning movie AlphaGo – it’s available for free on [youtube](https://www.youtube.com/watch?v=WXuK6gekU1Y). Or, for a more fictionalized account of the possible future of this field, you could watch the movies  [Ex Machina](https://en.wikipedia.org/wiki/Ex_Machina_(film)) or [Her](https://en.wikipedia.org/wiki/Her_(film)).  
