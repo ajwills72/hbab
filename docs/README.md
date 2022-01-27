@@ -12,12 +12,24 @@ If you’d like to know more about these topics, a great place to start would be
 
 ## Sequence of seminars
 
-1. **History**: From perceptrons to back-propagation
+- **Seminars 1-2**: Introduction, history and core concepts; from perceptrons to back-propagation
 
-1. **Vision**: The rise of convolutional neural networks
+- **Seminar 3**: Perception - the rise of convolutional neural networks
 
-1. **Action**: Reinforcement Learning, and the playing of games
+- **Seminar 4**: Action - reinforcement Learning.
 
-1. **Language**: State-of-the-art in language comprehension 
+- **Seminar 5**: Philosophy and ethics -  the future of work; rights and responsibilities; malevolent AI and the singularity.
 
-1. **Philosophy and ethics**: The future of work; rights and responsibilities; malevolent AI and the singularity.
+## Assessment 
+
+### Main period
+
+1. Critically review the development of brain-like artificial intelligence systems for perception, from the Mark 1 Perceptron to modern convolutional networks. What innovations took us from one to the other? How did the systems improve, and what is still left to do?
+
+2. The development of fully autonomous vehicles is one goal of artificial intelligence research. What are the ethical and societal issues surrounding the achievement of that goal? 
+
+### Referral period
+
+1. Critically review the development of brain-like artificial intelligence systems for action, from TD-Gammon to AlphaGo. What changed, and what is still left to do?
+
+2. One consequence of artificial intelligence research may be the development of autonomous weapons. What ethical and societal issues does this raise?
