@@ -22,3 +22,16 @@ XOR - AI pessimism
 Backprop - (re)birth of connectionism
 
 How brain-like is backprop?
+
+
+## Demonstrations in keras
+
+- [Minimal XOR solving with backprop](https://github.com/conwayok/keras-xor-example/blob/master/keras-xor-example/train.py)
+
+
+## History
+
+- [Perceptrons, the book (wikipedia)](https://en.wikipedia.org/wiki/Perceptrons_(book))
+
+- [Blog on perceptrons, including a nice Rosenblatt and machine pic](https://fiascodata.blogspot.com/2018/05/a-computer-program-is-said-tolearn-from.html)
+
