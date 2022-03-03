@@ -12,19 +12,24 @@ The pre-session videos were:
 
 The goals for these first two sessions are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to 1986, when "connectionism" became mainstream in psychology.  In the next two sessions, we'll cover state-of-the-art research in perception (session 3) and action (session 4). Having learned the basics of where AI came from, and where it is today, we'll spend the fifth session on the philosophical and ethical implications of AI. The 6th session has no new content, and is given over to discussions, questions, and essay advice. 
 
+## Diversity 
+
+Before we get into any of this, there's a broader social issue I'd like to address directly. In my teaching, I generally like to tell you about the people behind the work, as I think this gives a better sense of how science gets done. However, historical lack of diversity in the field means that I end up with a set of mugshots of old white men. It doesn't have to be that way, and things are beginning to change. As an antidote to the lack of diversity in what's to follow, please take a look at the much broader range of people now involved in AI - for example, see this series of interviews on [NESTA](https://www.nesta.org.uk/feature/12-women-ai/).
+
+
 ## Early history (2 min)
 
 We can trace the idea of artificial intelligence back to the Greeks. Hepheastus ([pronunication](https://duckduckgo.com/?t=ffab&q=pronounce+Hepheastus&iax=videos&ia=videos&iai=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Df8Yrm0c_kcU)), a god, made Talos - a huge bronze statue that defended an island. And Pygmalion, a king, made a marble statue of his perfect woman, that Aprophdite, a goddess, then brought to life as Galatea. The two married and had a child. In the modern era, Mary Shelley's Frankenstein, published in 1818, was importantly different - now it was a not god, but a man, Victor Frankenstein, who was doing the bringing to life. He does this through the power of science. The Creature is 8ft tall, and each of his components is selected to be beautiful, but upon animation the Creature is hideous. 
 
 At the time Mary Shelley was writing Frankenstein, we knew very little about how the brain worked. Several decades later, as the 19th century came to a close, we came to believe -  through the work of Golgi and Cajal -  that the brain was composed of discrete units. These units became known as neurons. Work continued throughout the first half of the 20th century, including at the Plymouth Marine Laboratory, where before and after the Second World War, Alan Hodgkin and Andrew Huxley did much of the work that eventually resulted in the Hodgkin-Huxley model. This is a mathematical account of the electro-chemical process by which neurons fire.
 
-## Three abstractions (5 min)
+## Three abstractions (6 min)
 
-It was this work which informed the three abstractions upon which most brain-inspired AI is currently based. In the following, I'll describe these abstractions both in words, and in equations, and sometimes also with diagrams and charts. For the purposes of this course, you only need to understand one of those explanations to keep up. Ask if you're unsure.
+It was this and related work which informed the three abstractions upon which most brain-inspired AI is currently based. In the following, I'll describe these abstractions both in words, and in equations, and sometimes also with diagrams and charts. For the purposes of this course, you only need to understand one of those explanations to keep up. Ask if you're unsure.
 
 The first key abstraction is the idea that a neuron has a level of _output activation_, a single number that represents its current rate of firing (the rate at which it produces action potentials). This ignores what might turn out to be some important details, like the timing of the action potentials, but it's a simplification assumed throughout this course. 
 
-The second key abstraction is that the _output activation_ of a neuron is the sum of its _input activations_. Actually, it's a bit more complex than that, but we'll come back to this. 
+The second key abstraction is that the _output activation_ of a neuron is the sum of its _input activations_. 
 
 The third key abstraction is that an input activation is calculated by taking an output activation, and multiplying it by the strength of the connections between the two neurons.
 
@@ -38,17 +43,15 @@ A couple of things to notice in that example.
 
 First, that connections can have a negative weight. We call these _inhibitory_ connections because the more one neuron fires, the more it inhibits the firing of the neuron it's connected to. 
 
-Second, the output activation is negative. This makes less sense - a neuron can't have a firing rate of less than zero. This is what I meant about the calculation of output activation being a bit more complex than just adding up.
+Second, the output activation is negative. This makes less sense - a neuron can't have a firing rate of less than zero. 
 
-## Activation functions (1 min)
-
-One common way of handling the problem of negative activations is to use a _logistic_ activation function, also known as a sigmoid. 
+One common way of handling the problem of negative activations is to use a _logistic_ activation function, also known as a sigmoid. The _e_ in the equation is [Euler's number](https://en.wikipedia.org/wiki/E_(mathematical_constant)), which is approximately 2.72. 
 
 This function is useful in solving our problem, because, however negative the sum of the input activations, the output activation never falls below zero.
 
 It's also plausible in the sense that neurons have a maximum, as well as a minimum, firing rate. With the logistic function, the output activation of a neuron never exceeds one, however large its input. 
 
-Finally -- and this is beyond the scope of current course -- the logistic function is very useful in a mathematical sense in that it is easy to calculate the derivative and the integral. This helps mathematicians to understand how these systems work, and this deeper understanding allows us to build better AI. 
+Finally - and this is beyond the scope of current course - the logistic function is very useful in a mathematical sense in that it is easy to calculate the derivative and the integral. This helps mathematicians to understand how these systems work, and this deeper understanding allows us to build better AI. 
 
 We'll come back to activation functions briefly in session 3, but for now we'll look at examples where it's OK to just add up the input activations.
 
@@ -66,9 +69,7 @@ What do the connection weights need to be in order for the neural network to sto
 
 Take a moment to think about this. 
 
-Answers?
-
-$w_{B}$ must be one, so that the activation of the bell representation leads to the activation of the food representation. When bell and light are both present, the light must 'over rule' the bell. We can represent that by setting $w_{L}$ to minus one. This way the sum of the input activations times the weights is zero, which is what we want.
+Answer: $w_{B}$ must be one, so that the activation of the bell representation leads to the activation of the food representation. When bell and light are both present, the light must 'over rule' the bell. We can represent that by setting $w_{L}$ to minus one. This way the sum of the input activations times the weights is zero, which is what we want.
 
 Note that this leads to a prediction about the dog's future behaviour. The light has become an _inhibitor_, it will make the dog less likely to expect food. So if we, for example, now train the dog that a peppermint smell predicts food, and then later present the smell and the light together, the dog will salivate less to this peppermint-light compound than the peppermint on its own. This is called a _summation_ test and this is indeed the behaviour we observe. 
 
@@ -82,9 +83,9 @@ Can we get neural networks to learn what their weights should be?
 
 Yes, we can. And, like the abstractions of activations and weights, the way we can do this is directly inspired by work in psychology and neuroscience.
 
-By tradition, I'll focus on the work of Donald Hebb here, although as is often the case, other people did earlier, better, but less famous work. If this ironic aspect of history interests you, read up about Jerzy Konorski. Konorski, in turn, was predated by Santiago Cajal by about 50 years. So, in terms of historical precedent for what we call "Hebbian" learning, one can go back at least as far as Cajal's public lecture in 1894. 
+By tradition, I'll focus on the work of Donald Hebb here, although as is often the case, other people did earlier  but less famous work. If this ironic aspect of history interests you, read up about Jerzy Konorski. Konorski, in turn, was predated by Santiago Cajal by about 50 years. So, in terms of historical precedent for what we call "Hebbian" learning, one can go back at least as far as Cajal's public lecture in 1894. 
 
-## Hebbian Learning (1 min)
+### Hebbian Learning (1 min)
 
 Anyway, Hebb famously said:
 
@@ -94,12 +95,12 @@ In modern times, we prefer the catchier:
 
 "neurons that fire together wire together"
 
-## Neuroscience of learning (1 min)
+### Neuroscience of learning (1 min)
 
 In neuroscience, this behaviour of neurons is called long-term potentiation. It was first observed in the 1960s by a number of people, including Eric Kandel in 1964 and Terje Lømo in 1966. The mechanisms at the level of individual neurons are now somewhat understood, thanks in part to work on Aplysia Californica, a sea slug with a small number of large neurons, about 20,000 neurons, with cell bodies of around 1mm. 
 
 
-## Applying Hebbian learning (2 min)
+### Applying Hebbian learning (2 min)
 
 This idea, called Hebb's Law, can be expressed like this:
 
@@ -113,7 +114,6 @@ So, the first time the bell is rung, the dog doesn't expect food and so the conn
 
 As the two things repeatedly co-occur, the connection strength between them increases -- the network is learning. This seems to be OK for a while, but it has the odd property that the connection always gets stronger - there is no point at which learning is complete. 
 
-
 This is odd for a couple of reasons. First, the strength of connection between two neurons does presumably have an upper limit - it's a real system and so can't grow infinitely. 
 
 Second, somewhat intuitively, it seems like that, after the first thousand (or 10,000) times a bell is followed by food, there's not much more to learn. 
@@ -124,7 +124,7 @@ We see something similar in Pavlovian conditioning, as this graph from an experi
 
 So, learning tends to slow as it proceeds. 
 
-## Bush and Mosteller (3 min)
+### Bush and Mosteller (3 min)
 
 In 1951 two psychologists expressed that idea in an equation.
 
@@ -144,21 +144,23 @@ The system learns a bit less next time. t is still 1, as is a_1, but now the wei
 
 Each time the bell is followed by food, the connection weight goes up a bit, but less than it did last time. Eventually, the student is now the master and the learning is complete.
 
-## The delta rule - psychology
+### The delta rule
 
 Although Bush and Mosteller's system provides a simple way for a neural network to learn, it's not much used in modern systems. There are quite a few reasons for this, but we're going to deal with a couple - one from psychology, and one from AI.
 
+#### Psychology
+
 The reason from psychology is that the Bush-Mosteller system is not a good model of how people and other animals learn. Perhaps the simplest way to illustrate this is to consider the phenomenon of blocking, first reported by Kamin in 1969. It's subsequently been demonstrated many times in many species. 
 
-Let's look at blocking in the case of a simple animal experiment. A mouse first repeatedly observes the a light is followed by food. It learns to salivate to the light. Next a tone is presented at the same time as the light, again followed by food. This also happens multiple times. Finally, the tone is presented alone, without the light. 
+Let's look at blocking in the case of a simple animal experiment. A mouse first repeatedly observes that a light is followed by food. It learns to salivate to the light. Next a tone is presented at the same time as the light, again followed by food. This also happens multiple times. Finally, the tone is presented alone, without the light. 
 
 What does the Bush-Mosteller system predict in this case? Thoughts?
 
 Well, if you pair light with food often enough, the association will go to 1, and then stop. Now, when you present the tone and light together, the association to the light won't increase any further, but the association between tone and food will go to one. So, when the tone is presented without the light, the mouse expects food and so salivates.
 
-This is not what happens. In fact, little salivation occurs to the tone alone. This is how the phenomenon gets its name. The association of the tone to the food seems to be blocked by the pre-existing association of the light to the food. 
+This is not what happens. In fact, little salivation occurs to the tone alone. This is how the phenomenon gets its name -  the association of the tone to the food seems to be _blocked_ by the pre-existing association of the light to the food. 
 
-Over the coming decades, quite a lot of psychologists would propose various theories of why blocking occurs. In fact, three members of staff in our School have worked on this - myself, Chris Mitchell, and Peter Jones, and our academic 'parents' (i.e. Ph.D. supervisors) and grandparents - Nick Mackintosh, John Pearce, Ian McLaren - worked on it, too. For today, though, we'll focus on just one theory - the Rescorla-Wagner theory, from 1972.
+Over the coming decades, quite a lot of psychologists would propose various theories of why blocking occurs. In fact, three members of staff in our School have worked on this - myself, Chris Mitchell, and Peter Jones, and our academic 'parents' (i.e. Ph.D. and post-doc supervisors) and grandparents - Nick Mackintosh, John Pearce, Ian McLaren, Geoff Hall - worked on it, too. For today, though, we'll focus on just one theory - the Rescorla-Wagner theory, from 1972.
 
 I'm picking on Rescorla-Wagner for two reasons. First, it's one of the earliest and simplest explanations of blocking. Second, it's basically the same theory as AI researchers came up with in the early 1960s - although the two groups seemed largely unaware of each other at the time. 
 
@@ -166,17 +168,17 @@ Rescorla-Wagner theory is just a minor modification on Bush and Mosteller's idea
 
 In some ways, that's a bit of a weird idea if there's more than two neurons. For example, in the case of a blocking experiment, the network ends up over-predicting the food. The teaching signal is 1, but the connection between light and food is 1, as is the connection between tone and food. So, the total input to the food nodes is 2, even though the teaching signal is 1.
 
-One could argue about whether that's a problem or not. I mean, one way you could fix that is to have an activation function, like we discussed earlier, so that output activation did not exceed one. But, the Rescorla-Wagner theory takes the position that learning should stop when the sum of the input activations matches the teaching signal. In other words, when the outcome - food - is fully predicted. This idea allows it to predict blocking
+One could argue about whether that's a problem or not. I mean, one way you could fix that is to have an activation function, like we discussed earlier, so that output activation did not exceed one. But, the Rescorla-Wagner theory takes the position that learning should stop when the sum of the input activations matches the teaching signal. In other words, when the outcome - food - is fully predicted. This idea allows it to predict blocking.
 
 Let's see how that works. 
 
 When the food and light are presented together, the association between them rises to one and stops, just like in Bush-Mosteller.
 
-However, now the tone comes along. The food is already fully predicted by the light, and so from the perspective of Rescorla-Wagner, there's nothing to learn. The weight between tone and food remains at zero. This is often described as error-correcting learning --- we only learn to the extent we need to in order to avoid errors.
+However, now the tone comes along. The food is already fully predicted by the light, and so from the perspective of Rescorla-Wagner, there's nothing to learn. The weight between tone and food remains at zero. This is often described as error-correcting learning - we only learn to the extent we need to in order to avoid errors.
 
 So, now when the tone is presented on its own, the food node is not activated. Rescorla-Wagner theory predicts blocking!
 
-## The delta rule - AI
+#### AI
 
 So, one reason to build a brain using the delta rule - Rescorla-Wagner theory - rather than Hebbian learning or the Bush-Mosteller equation is that it seems to be a better account of how people and other animals learn. 
 
@@ -188,17 +190,17 @@ In the late 1950s, there was a lot of excitement and hype about brain-inspired A
 
 So, around 15 years before I was born, the US Navy thought it was beginning to gestate what is now called a Artificial General Intelligence. Almost a lifetime later, progress has been somewhat limited! What went wrong?
 
-## Limitations of single-layer networks
+## Multilayer networks
 
 There's an important distinction to make here. With the delta rule, a single-layer network has a mechanism by which it _will_ learn anything it _can_ learn. But what _can_ it learn? 
 
 Well, turns out, there are some relatively simple problems single-layer networks cannot learn. For example, say a menu says that the omlette comes with chips or salad. Which of these orders fits that rule?
 
-1. Omlette and chips
+1. Omelette and chips
 
-2. Omlette and salad
+2. Omelette and salad
 
-3. Omlette, chips, and salad
+3. Omelette, chips, and salad
 
 Most people say (1) and (2) fit the rule, but (3) does not. Formally speaking, this is an exclusive-or rule (XOR). You can have chips, or salad, but not both. (You also can't have neither in XOR, which might diverge a bit from the restaurant example, but let's stick with it). 
 
@@ -212,8 +214,41 @@ Along with a number of other developments, the 1970s saw a marked reduction in i
 
 When things started to take off again in AI around 1980, brain-inspired systems were nowhere to be seen. It wouldn't be until the end of the 80s that things would begin to pick up again for brain-inspired AI.
 
+### Solving XOR
 
-- Backpropagation
+While brain-inspired AI fell out of the limelight around the time I was born, all the pieces of the puzzle for its eventual resurgence were already there. Let's trace the roots of its return to form.
+
+The first thing to note is that, well before Minsky & Papert's book, people were aware that a neural network could learn an XOR relationship, it just needed more than one layer of weights, and the concept of a _threshold_, i.e. a minimum level of input required for a unit to produce output.
+
+With these two things, you can build a neural network that solves XOR with four neurons. Let's work through how it does that. When just one of the units is on, say the top one, what happens? Let's look first at the middle unit, which we also call a _hidden unit_ because it is hidden between the input and output units. The hidden unit receives input of one from the "chips" (C) neuron, and no input from the "salad" (S) neuron. So it's total input is one, which is lower than it's threshold of 1.5, so it produces no output.
+
+Now, let's look at the output unit. It receives an input of 1 from C, zero from S and zero from the hidden unit. So, it's total input is 1. That's greater than its threshold of 0.5, so the output unit is active.
+
+However, when we get both chips and salad, things are different. Specifically, the hidden unit receives an input of two, which is greater than its threshold. The output units gets an input of one from C, and input of 1 from S, but an input of -2 from the hidden unit. Overall, the activation is zero.
+
+OK, so a neural network with a hidden neuron can solve XOR if we give it the right weights and thresholds.
+
+The next part of the puzzle is ... how does the network learn these weights for itself? 
+
+### Backpropagation of error
+
+We might assume that we can use the same method as before - the delta rule (also known as Rescorla-Wagner theory). This works for the connections in blue - we know what the output should be (t), we know the prediction coming from the network ($\Sigma_{aw}$), and we know the activation of the neurons.
+
+The problem comes with the connections in red. How should we update these? What should the output of the hidden unit be? We don't know, because the hidden unit doesn't directly represent anything observable. The input units represent chips and salad, we can observe those. The output unit represents whether this is valid choice or not, we can give the network feedback about that so it can learn. But how do we give it feedback about what its hidden unit should be doing?
+
+The most common solution to this puzzle is called backpropagation of error. This is at the heart of most neural network systems in AI, so let's take it step by step.
+
+First, what do we mean by "error"? Error is the difference between what the correct answer is (t) and what the student predicts. So, the delta rule changes weights to the extent that there is an error of prediction, which is why it's often referred to as a model of error-driven learning.
+
+Now we have the concept of _error_, we can reformulate our problem. The problem is, what should the error be at the hidden unit?
+
+Let's look at a network that is on its way to learning XOR. To make the example simpler, we're going to ignore the thresholds. The error at the output unit is -1. The idea of backpropagation of error is that the error at the output unit is passed back to the hidden unit, along the weight connecting them. So, in this example, the error and the connection are both negative, so we end up with a positive error.
+
+Now we have an error for the hidden unit, we use it to update the weights as normal. So, the error is positive here, and thus the weights from the input units to the hidden unit will increase. This is what we want, as it'll reduce error at the output unit - in other words, we'll be closer to having learned the problem. 
+
+And that is backpropagation of error - probably the single most important innovation in brain-inspired AI. But whose idea was it?
+
+
 
 - Connectionist revolution
 
@@ -225,6 +260,8 @@ When things started to take off again in AI around 1980, brain-inspired systems 
 - [History of neuroscience](https://en.wikipedia.org/wiki/History_of_neuroscience)
 
 - [Summary of the neuron](https://en.wikipedia.org/wiki/Neuron)
+
+- [Santiago Ramon y Cajal](https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal)
 
 - [Jerzy Konorski](https://en.wikipedia.org/wiki/Jerzy_Konorski)
 
@@ -250,6 +287,10 @@ When things started to take off again in AI around 1980, brain-inspired systems 
 
 - [The sociology of the Perceptrons Controversy](https://www.jstor.org/stable/285702?seq=1#metadata_info_tab_contents)
 
+- [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
+
+- [Lighthill report](https://en.wikipedia.org/wiki/Lighthill_report)
+
 ## Suggested further viewing
 
 - [Pygmalion and Galatea](https://www.youtube.com/watch?v=lH1yMnoOD_)
@@ -268,7 +309,9 @@ When things started to take off again in AI around 1980, brain-inspired systems 
 
 ## Image sources
 
-In order of appearance:
+In order of appearance (roughly):
+
+- [Diversity in AI research](https://www.nesta.org.uk/feature/12-women-ai/)
 
 - [Image on goals slide](https://www.itprotoday.com/sites/itprotoday.com/files/Neural_network.jpg)
 
@@ -336,6 +379,18 @@ In order of appearance:
 
 - [Bernard Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow#/media/File:Widrow_with_Adaline.svg)
 
+- [James Lighthill](https://en.wikipedia.org/wiki/James_Lighthill)
+
+- [Book cover for Perceptrons](https://www.amazon.co.uk/perceptrons-introduction-computational-geometry-expanded/dp/0262631113)
+
+- [Seymour Papert](https://en.wikipedia.org/wiki/Seymour_Papert)
+
+- [Marvin Minksy](https://en.wikipedia.org/wiki/Marvin_Minsky)
+
+- [salad](https://totsfamily.com/green-salad-recipe-homemade-honey-mustard-dressing/)
+
+- [salad, omelette, chips](https://www.tripadvisor.com/LocationPhotoDirectLink-g1190956-d6102631-i300833541-Restaurante_O_Farolim-Ponta_do_Pargo_Calheta_Madeira_Madeira_Islands.html)
+
 
 
 The core concepts are:
@@ -367,9 +422,7 @@ How brain-like is backprop?
 
 ## Links not yet used
 
-- [Lighthill report](https://en.wikipedia.org/wiki/Lighthill_report)
 
-- [James Lighthill](https://en.wikipedia.org/wiki/James_Lighthill)
 
 - [Yann LeCunn](https://en.wikipedia.org/wiki/Yann_LeCun)
 
