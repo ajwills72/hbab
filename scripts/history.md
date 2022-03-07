@@ -8,9 +8,9 @@ The pre-session videos were:
 
 1. Robots from [Boston Dynamics](https://en.wikipedia.org/wiki/Boston_Dynamics) dancing.
 
-## Goals for today (1 min)
+## Goals (1 min)
 
-The goals for these first two sessions are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to 1986, when "connectionism" became mainstream in psychology.  In the next two sessions, we'll cover state-of-the-art research in perception (session 3) and action (session 4). Having learned the basics of where AI came from, and where it is today, we'll spend the fifth session on the philosophical and ethical implications of AI. The 6th session has no new content, and is given over to discussions, questions, and essay advice. 
+The goals for this course  are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to today.  We'll also cover state-of-the-art research in perception and action. And, having learned the basics of where AI came from, and where it is today, we'll spend the some time  on the philosophical and ethical implications of AI. 
 
 ## Diversity 
 
@@ -206,7 +206,7 @@ Most people say (1) and (2) fit the rule, but (3) does not. Formally speaking, t
 
 A single-layer network, with the input nodes chips and salad, can never learn that (3) is not OK. To learn (1), it needs a association of 1 between chips and OK. To learn (2) is needs an association of 1 between salad and OK. So, when presented with omlette and salad, it's really confident that this is OK. There's no set of weights that will solve this problem. 
 
-The fact that single-layer networks cannot learn fairly simple relationships like XOR led to people in AI losing interest in brain-inspired systems. This is sometimes attributed to Minsky & Papert's highly critical book "Perceptrons", published in 1969 - sometimes described as killing off neural network research for a decade. Whole papers in sociology have been written about this. 
+The fact that single-layer networks cannot learn fairly simple relationships like XOR led to people in AI losing interest in brain-inspired systems. This is sometimes attributed to Minsky & Papert's highly critical book "Perceptrons", published in 1969 - sometimes described as killing off neural network research for a decade. [Whole papers in sociology](https://www.jstor.org/stable/285702?seq=1#metadata_info_tab_contents) have been written about this. 
 
 Along with a number of other developments, the 1970s saw a marked reduction in interest in (and funding for) AI research. This is known as the First AI winter (around 1974-1980). In the UK, the Lighthill report in 1974 said:
 
@@ -248,9 +248,54 @@ Now we have an error for the hidden unit, we use it to update the weights as nor
 
 And that is backpropagation of error - probably the single most important innovation in brain-inspired AI. But whose idea was it?
 
+### History
+
+If you ask a psychologist, they'll probably say that backprop was invented by Rumelhart, Hinton & Williams in 1986. This is because these three people did more than any other to popularize the approach to psychologists. They also made some non-trivial contributions, which we'll come to later. However, the basic idea was known around the same time as Rosenblatt's early work -- it can be traced back to work in aerospace engineering done by Henry Kelley in 1960. It took another 14 years before anyone seemed to realise the same idea could be used to train multilayer neural networks - this idea was first published by Paul Werbos in his Ph.D. thesis in 1974. 
+
+Progress from this initial idea was slow, with the idea being picked up independently, not only by Rumelhart, Hinton & Williams in 1986 , but also by Parker, and by Yann LeCun, both in 1985. Although I've not made a detailed study, my guess is that the main thing that happened in that 'dead decade' was that computers suddenly got a lot faster and cheaper in the mid 80s, so it was possible for a wider range of people to play around with backprop and see what it could do in practice. This was in fact, to my mind, the most important contribution of Rumelhart and colleagues in this regard --- they showed the world that backprop could do useful work, that it worked _in practice_. They included their work in an enormously influential two-volume book called _Parallel Distributed Processing_. More than any other single source, this was responsible for psychologists adopting neural networks as models of human behaviour, in a field that became known as _connectionism_. When I decided to do a Ph.D. in 1994, connectionism was very much in vogue, and it was these two volumes that, along with my supervisor Ian McLaren, are largely responsible for where I did my Ph.D. and what I did it on.
+
+### Power and limitations of backprop
+
+So, by 1986, the world was increasingly becoming aware that you could train multilayer neural networks using backpropagation. A few years later, Hornik, Stinchcombe & White (1989), reported a very important discovery - multilayer nets are _universal approximators_. The maths is quite complex here, but the conclusion is astounding - this kind of neural net can, in principle, represent _any_ (deterministic) mapping between its inputs and its outputs, as long as it has enough hidden units.
+
+So, mulltilayers are, in principle, really powerful - it's not possible to come up with a relationship between input and output that it cannot represent. The difficulty is that, saying it _can_ represent it is different to saying it can learn it. This is sort of the opposite to the _convergence_ theorem we discussed earlier. A single-layer delta-rule network _will_ learn anything it can learn. A multilayer network _can_ learn anything, but there remains the question of whether it _will_ learn it. 
+
+In particular, _backprop_ is not guaranteed to learn, due to the problem of _local minima_.
+
+#### Local minima
+
+To understand the problem of local minima, one needs to remember that the way we train a neural network is to minimize error - when it stops making errors, it has learned. We do this by changing the weights of connections.
+
+Let's illustrate this with the simplest possible system - two neurons and one link. The weight of that link can go from a large negative number to a large positive number. If we want to represent a simple Pavlovian relationship, such as bell -> food, then the error in our system will be zero when the weight of that connection is 1. 
+
+In a simple system like this, it's always obvious what you should do to reduce error. If weight is greater than one, you reduce it. If it's less than one, you increase it. We can visualize this as a ball rolling down a hill - the hill has a gradient, and we go in the direction in which the gradient is most negative. For this reason, we sometimes describe learning as _gradient descent_. The simple delta rule (Rescorla-Wagner theory) performs gradient descent to learn.
+
+The power of that simple learning algorithm is that it will always find the solution, if that solution can be represented by the network. That's because the error surfaces for single layer networks, even when there are many connections, always have a single minimum point. 
+
+The problem with multilayer networks is that the error surface is often more complex - in particular, they can have _local minima_, which means that, depending on where the network starts, it might not learn the mapping.
+
+In our first example, the network started with a relatively low weight, and it used gradient descent to continue to reduce the weight until any further change - increase or decrease - would have increased the error, and its stopped. It also found the solution, the error is the minimum possible error for the problem.
+
+However, in our second example, the network started with a somewhat higher weight. It "rolls downhill" as before, and it again reaches a point where any further change - increase or decrease - would increase error. It therefore stops. However, this is not the solution to the problem - the error is higher than it could be. We say that the network has got stuck in a local minimum. Although it's obvious to us that it it continued to decrease its weight, despite the increase in error, it would eventually find the best solution. But backpropagation (at least in its basic form) will not do that, and so it fails to learn.
+
+How much of a problem local minima are depends a lot on how likely the network is to get trapped in them for things we actually want it to learn. One of the main contributions of Rumelhart, Hinton and Williams was to show that for a range of things that people can learn, the likelihood of a backprop net getting stuck in a local minimum was very low. These demonstrations were really important in convincing psychologists to consider connectionist models as accounts of human behaviour. However, this fairly quickly hit a couple of objections, which we'll cover next.
 
 
-- Connectionist revolution
+#### Catastrophic interference
+
+We've known for a very long time that when people learn new information, it can interfere with old information - we call this _retroactive inteference_. One example of this behaviour was reported by Barnes & Underwood (1959). Participants first learn a list of nonwords pairsed with real words (e.g. dax-regal). They then learn a second list of nonword-word pairs (e.g. dax-cabbage). This second list has the same cues (first words), but different targets (second words). In the test phase, they are shown the cues (e.g. dax) and asked what they were paired with. More time spent learning the second list leads to two things: (1) better memory of the second list, (2) worse memory of the first list. However, note that the first list is not completely forgotten.
+
+McCloskey and Cohen (1989) showed that things are different when you train a backprop net on this problem. It can learn the first list perfectly. It can also learn the second list perfectly. The problem is, in order to learn the second list, it completely forgets the first list. This is very unlike people.
+
+Note that McCloskey & Cohen's result came out the same year as Hornik and colleagues showed that these kind of networks can represent any mapping. So, why does it do so poorly here? Actually, the network can learn both lists just fine ... but you have to _intermix_ the training. So, rather than teaching list 1 and then list 2, you mix them up and train the items in a random order. The problem only occurs if you try and train one and then the other. 
+
+Although that solves the problem in principle, catastrophic inference continues to cause major practical problems to this day. A robot suffering from catastrophic interference can be taught many things in the lab, because we can arrange for all those things to be mixed up so it doesn't forget. But, once it leaves the lab and makes its own way in the world, we have to prevent it from learning further. If it continued to learn, it would lose what we'd already taught it. We would have a Homer Simpson robot!
+
+There have been various ideas for solving the catastrophic interference problem (you can read about some of them [here](https://en.wikipedia.org/wiki/Catastrophic_interference)), but in practice it's still with us today. 
+
+#### Neural plausibility
+
+One fairly ironic thing is that, while backprop was largely responsible for bringing brain-inspired AI back to popularity, it did so by making it less brain-like. The backprop algorithm requires one to calculate error, and pass it _back_ along the connection. Neurons just do not work like that, activation goes in one direction down a neural connection, not both. There have been various ideas for a more neurally plausible version of backprop, but they are beyond the scope for today.
 
 
 ## Suggested further reading
@@ -287,9 +332,20 @@ And that is backpropagation of error - probably the single most important innova
 
 - [The sociology of the Perceptrons Controversy](https://www.jstor.org/stable/285702?seq=1#metadata_info_tab_contents)
 
+- [Lighthill report](https://en.wikipedia.org/wiki/Lighthill_report)
+
 - [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
 
-- [Lighthill report](https://en.wikipedia.org/wiki/Lighthill_report)
+- [Rumelhart, Hinton & Williams (1986)](http://www.cs.toronto.edu/~hinton/absps/naturebp.pdf)
+
+- [Connectionism](https://en.wikipedia.org/wiki/Connectionism)
+
+- [Hornik, Stinchcombe & White (1989)](hornik1989.pdf)
+
+- [McCloskey & Cohen (1989)](mccloskeycohen.pdf)
+
+- [Catastrophic interference](https://en.wikipedia.org/wiki/Catastrophic_interference)
+
 
 ## Suggested further viewing
 
@@ -306,6 +362,7 @@ And that is backpropagation of error - probably the single most important innova
 
 - [Image of Frankenstein from NPR](https://knpr.org/npr/2018-01/see-famous-monster-come-alive-frankenstein-1818-text)
 
+- [Homer Simpson, "Every time I learn something..."](https://www.youtube.com/watch?v=MNeWZwUn3x0)
 
 ## Image sources
 
@@ -391,28 +448,15 @@ In order of appearance (roughly):
 
 - [salad, omelette, chips](https://www.tripadvisor.com/LocationPhotoDirectLink-g1190956-d6102631-i300833541-Restaurante_O_Farolim-Ponta_do_Pargo_Calheta_Madeira_Madeira_Islands.html)
 
+- [simple error gradient](https://www.desmos.com/calculator)
 
+- [Sun-1 workstation](https://en.wikipedia.org/wiki/Sun-1)
 
-The core concepts are:
+- [Rumelhart, Hinton, Williams](https://aiws.net/the-history-of-ai/aiws-house/page/2/)
 
+- [Paul Werbos](https://en.wikipedia.org/wiki/Paul_Werbos)
 
-Activations (firing rates)
-
-Spreading activation
-
-Weights (synaptic plasticity)
-
-
-
-Learning rule (Delta rule)
-
-Perceptron convergence theorem - AI optimism. 
-
-XOR - AI pessimism
-
-Backprop - (re)birth of connectionism
-
-How brain-like is backprop?
+- [Henry Kelley](https://www.gwern.net/docs/ai/1989-cliff.pdf)
 
 
 ## Demonstrations in keras
