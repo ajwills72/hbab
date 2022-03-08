@@ -108,6 +108,19 @@ In order of appearance (roughly):
 
 - [Henry Kelley](https://www.gwern.net/docs/ai/1989-cliff.pdf)
 
+- [Feng-Hsiung Hsu](https://www.chessprogramming.org/images/thumb/d/d8/5-2_and_3-1.Hsu.WCCC.Edmonton.1989.102645331.NEWBORN.lg.jpg/320px-5-2_and_3-1.Hsu.WCCC.Edmonton.1989.102645331.NEWBORN.lg.jpg)
+
+- [AlexNet architecture](https://www.researchgate.net/figure/Scheme-of-the-AlexNet-network-used_fig1_320052364)
+
+- [neural tuning](http://proprofs-cdn.s3.amazonaws.com/images/FC/user_images/1406217/9987848416.png)
+
+- [simple to complex in visual cortex](https://www.frontiersin.org/files/Articles/96694/fncom-08-00135-HTML/image_m/fncom-08-00135-g001.jpg)
+
+- [Yann LeCunn](https://en.wikipedia.org/wiki/Yann_LeCun)
+
+- [DSP used by LeCunn](http://www.akramz.space/posts/digit_recognizer/)
+
+- [SUN-4/260](http://computermuseum.informatik.uni-stuttgart.de/dev/sun4_260/)
 
 ## Demonstrations in keras
 
@@ -118,7 +131,7 @@ In order of appearance (roughly):
 
 
 
-- [Yann LeCunn](https://en.wikipedia.org/wiki/Yann_LeCun)
+
 
 - [Amazing neural network firing glass brain](https://www.youtube.com/watch?v=xRwW9tNQqDw)
 
