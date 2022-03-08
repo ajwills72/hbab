@@ -1,4 +1,4 @@
-# Lectures 1-2: History and core concepts
+# History and core concepts
 
 ## Opening videos
 
@@ -8,22 +8,24 @@ The pre-session videos were:
 
 1. Robots from [Boston Dynamics](https://en.wikipedia.org/wiki/Boston_Dynamics) dancing.
 
-## Goals (1 min)
+## Intrdouction
+
+### Goals 
 
 The goals for this course  are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to today.  We'll also cover state-of-the-art research in perception and action. And, having learned the basics of where AI came from, and where it is today, we'll spend the some time  on the philosophical and ethical implications of AI. 
 
-## Diversity 
+### Diversity 
 
 Before we get into any of this, there's a broader social issue I'd like to address directly. In my teaching, I generally like to tell you about the people behind the work, as I think this gives a better sense of how science gets done. However, historical lack of diversity in the field means that I end up with a set of mugshots of old white men. It doesn't have to be that way, and things are beginning to change. As an antidote to the lack of diversity in what's to follow, please take a look at the much broader range of people now involved in AI - for example, see this series of interviews on [NESTA](https://www.nesta.org.uk/feature/12-women-ai/).
 
 
-## Early history (2 min)
+## Early history
 
 We can trace the idea of artificial intelligence back to the Greeks. Hepheastus ([pronunication](https://duckduckgo.com/?t=ffab&q=pronounce+Hepheastus&iax=videos&ia=videos&iai=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Df8Yrm0c_kcU)), a god, made Talos - a huge bronze statue that defended an island. And Pygmalion, a king, made a marble statue of his perfect woman, that Aprophdite, a goddess, then brought to life as Galatea. The two married and had a child. In the modern era, Mary Shelley's Frankenstein, published in 1818, was importantly different - now it was a not god, but a man, Victor Frankenstein, who was doing the bringing to life. He does this through the power of science. The Creature is 8ft tall, and each of his components is selected to be beautiful, but upon animation the Creature is hideous. 
 
 At the time Mary Shelley was writing Frankenstein, we knew very little about how the brain worked. Several decades later, as the 19th century came to a close, we came to believe -  through the work of Golgi and Cajal -  that the brain was composed of discrete units. These units became known as neurons. Work continued throughout the first half of the 20th century, including at the Plymouth Marine Laboratory, where before and after the Second World War, Alan Hodgkin and Andrew Huxley did much of the work that eventually resulted in the Hodgkin-Huxley model. This is a mathematical account of the electro-chemical process by which neurons fire.
 
-## Three abstractions (6 min)
+## Three abstractions
 
 It was this and related work which informed the three abstractions upon which most brain-inspired AI is currently based. In the following, I'll describe these abstractions both in words, and in equations, and sometimes also with diagrams and charts. For the purposes of this course, you only need to understand one of those explanations to keep up. Ask if you're unsure.
 
@@ -55,7 +57,7 @@ Finally - and this is beyond the scope of current course - the logistic function
 
 We'll come back to activation functions briefly in session 3, but for now we'll look at examples where it's OK to just add up the input activations.
 
-## Storing knowledge (4 min)
+## Storing knowledge
 
 A collection of at least three neurons and two connections is known as a neural network. The human brain has about 85 billion neurons with perhaps one thousand times that number of connections, but let's start small. Even the smallest neural network can store information about the world. 
 
@@ -73,7 +75,7 @@ Answer: $w_{B}$ must be one, so that the activation of the bell representation l
 
 Note that this leads to a prediction about the dog's future behaviour. The light has become an _inhibitor_, it will make the dog less likely to expect food. So if we, for example, now train the dog that a peppermint smell predicts food, and then later present the smell and the light together, the dog will salivate less to this peppermint-light compound than the peppermint on its own. This is called a _summation_ test and this is indeed the behaviour we observe. 
 
-## Learning (2 min)
+## Learning
 
 So, the neurons - or "nodes" - in a neural network can represent things in the world, and the connections between those nodes can be used to store information about the world. But how does that information get in there? So far, we've been working it out for the neural network and giving it the answers. 
 
@@ -85,7 +87,7 @@ Yes, we can. And, like the abstractions of activations and weights, the way we c
 
 By tradition, I'll focus on the work of Donald Hebb here, although as is often the case, other people did earlier  but less famous work. If this ironic aspect of history interests you, read up about Jerzy Konorski. Konorski, in turn, was predated by Santiago Cajal by about 50 years. So, in terms of historical precedent for what we call "Hebbian" learning, one can go back at least as far as Cajal's public lecture in 1894. 
 
-### Hebbian Learning (1 min)
+### Hebbian Learning
 
 Anyway, Hebb famously said:
 
@@ -95,12 +97,12 @@ In modern times, we prefer the catchier:
 
 "neurons that fire together wire together"
 
-### Neuroscience of learning (1 min)
+### Neuroscience of learning
 
 In neuroscience, this behaviour of neurons is called long-term potentiation. It was first observed in the 1960s by a number of people, including Eric Kandel in 1964 and Terje Lømo in 1966. The mechanisms at the level of individual neurons are now somewhat understood, thanks in part to work on Aplysia Californica, a sea slug with a small number of large neurons, about 20,000 neurons, with cell bodies of around 1mm. 
 
 
-### Applying Hebbian learning (2 min)
+### Applying Hebbian learning
 
 This idea, called Hebb's Law, can be expressed like this:
 
@@ -124,7 +126,7 @@ We see something similar in Pavlovian conditioning, as this graph from an experi
 
 So, learning tends to slow as it proceeds. 
 
-### Bush and Mosteller (3 min)
+### Bush and Mosteller
 
 In 1951 two psychologists expressed that idea in an equation.
 
@@ -144,11 +146,11 @@ The system learns a bit less next time. t is still 1, as is a_1, but now the wei
 
 Each time the bell is followed by food, the connection weight goes up a bit, but less than it did last time. Eventually, the student is now the master and the learning is complete.
 
-### The delta rule
+## The delta rule
 
 Although Bush and Mosteller's system provides a simple way for a neural network to learn, it's not much used in modern systems. There are quite a few reasons for this, but we're going to deal with a couple - one from psychology, and one from AI.
 
-#### Psychology
+### Psychology
 
 The reason from psychology is that the Bush-Mosteller system is not a good model of how people and other animals learn. Perhaps the simplest way to illustrate this is to consider the phenomenon of blocking, first reported by Kamin in 1969. It's subsequently been demonstrated many times in many species. 
 
@@ -178,7 +180,7 @@ However, now the tone comes along. The food is already fully predicted by the li
 
 So, now when the tone is presented on its own, the food node is not activated. Rescorla-Wagner theory predicts blocking!
 
-#### AI
+### AI
 
 So, one reason to build a brain using the delta rule - Rescorla-Wagner theory - rather than Hebbian learning or the Bush-Mosteller equation is that it seems to be a better account of how people and other animals learn. 
 
@@ -190,7 +192,7 @@ In the late 1950s, there was a lot of excitement and hype about brain-inspired A
 
 So, around 15 years before I was born, the US Navy thought it was beginning to gestate what is now called a Artificial General Intelligence. Almost a lifetime later, progress has been somewhat limited! What went wrong?
 
-## Multilayer networks
+## First AI winter
 
 There's an important distinction to make here. With the delta rule, a single-layer network has a mechanism by which it _will_ learn anything it _can_ learn. But what _can_ it learn? 
 
@@ -214,7 +216,7 @@ Along with a number of other developments, the 1970s saw a marked reduction in i
 
 When things started to take off again in AI around 1980, brain-inspired systems were nowhere to be seen. It wouldn't be until the end of the 80s that things would begin to pick up again for brain-inspired AI.
 
-### Solving XOR
+## Solving XOR
 
 While brain-inspired AI fell out of the limelight around the time I was born, all the pieces of the puzzle for its eventual resurgence were already there. Let's trace the roots of its return to form.
 
@@ -230,7 +232,7 @@ OK, so a neural network with a hidden neuron can solve XOR if we give it the rig
 
 The next part of the puzzle is ... how does the network learn these weights for itself? 
 
-### Backpropagation of error
+## Backpropagation of error
 
 We might assume that we can use the same method as before - the delta rule (also known as Rescorla-Wagner theory). This works for the connections in blue - we know what the output should be (t), we know the prediction coming from the network ($\Sigma_{aw}$), and we know the activation of the neurons.
 
@@ -248,7 +250,7 @@ Now we have an error for the hidden unit, we use it to update the weights as nor
 
 And that is backpropagation of error - probably the single most important innovation in brain-inspired AI. But whose idea was it?
 
-### History
+### History of backprop
 
 If you ask a psychologist, they'll probably say that backprop was invented by Rumelhart, Hinton & Williams in 1986. This is because these three people did more than any other to popularize the approach to psychologists. They also made some non-trivial contributions, which we'll come to later. However, the basic idea was known around the same time as Rosenblatt's early work -- it can be traced back to work in aerospace engineering done by Henry Kelley in 1960. It took another 14 years before anyone seemed to realise the same idea could be used to train multilayer neural networks - this idea was first published by Paul Werbos in his Ph.D. thesis in 1974. 
 
@@ -351,132 +353,4 @@ One fairly ironic thing is that, while backprop was largely responsible for brin
 
 - [Pygmalion and Galatea](https://www.youtube.com/watch?v=lH1yMnoOD_)
 
-
-## Video sources
-
-- [Jason and the Argonauts](https://www.youtube.com/watch?v=Vk2iXkIH2xE) (1963)
-
-- [Miscellaneous myths: Pygmalion and Galatea](https://www.youtube.com/watch?v=lH1yMnoOD_8)
-
-- [Rocky Horror Picture Show](https://www.youtube.com/watch?v=LGzc0pIjHqw)
-
-- [Image of Frankenstein from NPR](https://knpr.org/npr/2018-01/see-famous-monster-come-alive-frankenstein-1818-text)
-
-- [Homer Simpson, "Every time I learn something..."](https://www.youtube.com/watch?v=MNeWZwUn3x0)
-
-## Image sources
-
-In order of appearance (roughly):
-
-- [Diversity in AI research](https://www.nesta.org.uk/feature/12-women-ai/)
-
-- [Image on goals slide](https://www.itprotoday.com/sites/itprotoday.com/files/Neural_network.jpg)
-
-- [Frankenstein's monster](https://en.wikipedia.org/wiki/Frankenstein%27s_monster#/media/File:Frankenstein,_or_the_Modern_Prometheus_(Revised_Edition,_1831)_Creature.jpg)
-
-- [Golgi's drawing of the hippocampus](https://upload.wikimedia.org/wikipedia/commons/5/5e/Golgi_Hippocampus.jpg)
-
-- [Cajal's drawing](https://en.wikipedia.org/wiki/Neuron#/media/File:PurkinjeCell.jpg)
-
-- [Plymouth Marine Laboratory](https://twitter.com/ajwills72/status/1274308573439365120/photo/1)
-
-- [Photo of Alan Hodgkin](https://en.wikipedia.org/wiki/Alan_Hodgkin#/media/File:Alan_Lloyd_Hodgkin_nobel.jpg)
-
-- [Photo of Andrew Huxley](https://en.wikipedia.org/wiki/Andrew_Huxley#/media/File:Andrew_Fielding_Huxley_nobel.jpg)
-
-- [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model)
-
-- [Neuron graphic on output activation slide](https://www.youtube.com/watch?v=8IFoUWb8kLQ), see 2:25. 
-
-- [Logistic function](https://en.wikipedia.org/wiki/Logistic_function)
-
-- [Pavlov and Seraphima](https://en.wikipedia.org/wiki/Ivan_Pavlov#/media/File:%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82._%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_%D0%98.%D0%9F._%D0%B8_%D0%B5%D0%B3%D0%BE_%D0%B1%D1%83%D0%B4%D1%83%D1%89%D0%B0%D1%8F_%D1%81%D1%83%D0%BF%D1%80%D1%83%D0%B3%D0%B0_%D0%A1.%D0%92._%D0%9A%D0%B0%D1%80%D1%87%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F._%D0%98%D1%8E%D0%BB%D1%8C1880%D0%B3(c)%D0%90.%D0%AF%D1%81%D0%B2%D0%BE%D0%B8%D0%BD._(pavlovs_museum).jpg)
-
-- [Thought bubble](https://www.seekpng.com/png/detail/771-7713174_thought-bubble-thinking-bubble-png.png)
-
-- [Jerzy Konorski](https://en.wikipedia.org/wiki/Jerzy_Konorski#/media/File:Jerzy_Konorski.jpg)
-
-- [Donald Hebb](https://en.wikipedia.org/wiki/Donald_O._Hebb#/media/File:Donald_Hebb.gif)
-
-- [Acquisition curve](https://www.researchgate.net/publication/8036457_Associative_learning_of_plant_odorants_activating_the_same_or_different_receptor_neurones_in_the_moth_Heliothis_virescens/download) from Skiri et al. (2005, Journal of Experimental Biology). 
-
-- [Bob Bush](https://www.sas.upenn.edu/psych/history/bushtext.htm))))
-
-- [Fred Mosteller](https://www.azquotes.com/quote/989087)
-
-- [Aplysia Californica](https://en.wikipedia.org/wiki/California_sea_hare#/media/File:Aplysia_californica.jpg)
-
-- [Terje Lomo](https://www.uniforum.uio.no/nyheter/2003/08/professor-terje-loemo-tildelt-anders-jahres-store-medisinske-pris.html?vrtx=email-a-friend)
-
-- [Eric Kandel](https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Eric_Kandel_01.JPG/1024px-Eric_Kandel_01.JPG)
-
-- [Leon Kamin](https://upload.wikimedia.org/wikipedia/en/a/a5/Leon_Kamin.jpg)
-
-- [Nick Mackintosh](https://www.psychol.cam.ac.uk/news/professor-nicholas-mackintosh)
-
-- [John Pearce](https://www.cardiff.ac.uk/people/view/1175169-pearce-john)
-
-- [Bob Rescorla](https://www.bestmastersinpsychology.com/30-most-influential-psychologists-working-today/)
-
-- [Alan Wagner](https://pagesped.cahuntsic.ca/sc_sociales/psy/introsite/lexique/definitionsw.htm)
-
-- [Ian McLaren](http://psychology.exeter.ac.uk/staff/profile/index.php?web_id=Ian_McLaren)
-
-- [Andy Wills](https://www.plymouth.ac.uk/staff/andy-wills)
-
-- [Chris Mitchell](https://www.plymouth.ac.uk/staff/christopher-mitchell)
-
-- [Peter Jones](https://www.researchgate.net/profile/Peter-Jones-57)
-
-- [Geoff Hall](https://duckduckgo.com/?q=geoff+hall+psychology&t=ffab&iax=images&ia=images&iai=https%3A%2F%2Fwww.york.ac.uk%2Fmedia%2Fpsychology%2Fimages%2Fpeople%2Femeritus-faculty%2FGeoff%2520200x300.jpg)
-
-- [Perceptron Mark 1](https://upload.wikimedia.org/wikipedia/en/5/52/Mark_I_perceptron.jpeg)
-
-- [Pictures of Rosenblatt and Perceptron](https://fiascodata.blogspot.com/2018/05/a-computer-program-is-said-tolearn-from.html)
-
-- [Bernard Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow#/media/File:Widrow_with_Adaline.svg)
-
-- [James Lighthill](https://en.wikipedia.org/wiki/James_Lighthill)
-
-- [Book cover for Perceptrons](https://www.amazon.co.uk/perceptrons-introduction-computational-geometry-expanded/dp/0262631113)
-
-- [Seymour Papert](https://en.wikipedia.org/wiki/Seymour_Papert)
-
-- [Marvin Minksy](https://en.wikipedia.org/wiki/Marvin_Minsky)
-
-- [salad](https://totsfamily.com/green-salad-recipe-homemade-honey-mustard-dressing/)
-
-- [salad, omelette, chips](https://www.tripadvisor.com/LocationPhotoDirectLink-g1190956-d6102631-i300833541-Restaurante_O_Farolim-Ponta_do_Pargo_Calheta_Madeira_Madeira_Islands.html)
-
-- [simple error gradient](https://www.desmos.com/calculator)
-
-- [Sun-1 workstation](https://en.wikipedia.org/wiki/Sun-1)
-
-- [Rumelhart, Hinton, Williams](https://aiws.net/the-history-of-ai/aiws-house/page/2/)
-
-- [Paul Werbos](https://en.wikipedia.org/wiki/Paul_Werbos)
-
-- [Henry Kelley](https://www.gwern.net/docs/ai/1989-cliff.pdf)
-
-
-## Demonstrations in keras
-
-- [Minimal XOR solving with backprop](https://github.com/conwayok/keras-xor-example/blob/master/keras-xor-example/train.py)
-
-
-## Links not yet used
-
-
-
-- [Yann LeCunn](https://en.wikipedia.org/wiki/Yann_LeCun)
-
-- [Amazing neural network firing glass brain](https://www.youtube.com/watch?v=xRwW9tNQqDw)
-
-- [Single neuron firing](https://www.youtube.com/watch?v=lhkK6jURljs)
-
-## Exercises
-
-- Extinction
-- Over-expectation
-- Superconditioning
 
