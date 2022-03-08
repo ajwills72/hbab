@@ -10,15 +10,15 @@ In this series of five two-hour seminars, we’ll trace the origins of how psych
 
 If you’d like to know more about these topics, a great place to start would be to watch the award-winning movie AlphaGo – it’s available for free on [youtube](https://www.youtube.com/watch?v=WXuK6gekU1Y). Or, for a more fictionalized account of the possible future of this field, you could watch the movies  [Ex Machina](https://en.wikipedia.org/wiki/Ex_Machina_(film)) or [Her](https://en.wikipedia.org/wiki/Her_(film)).  
 
-## Sequence of seminars
+## Content
 
-- **Seminars 1-2**: Introduction, history and core concepts; from perceptrons to back-propagation
+- **History and core concepts** - from Ancient Greece to backprop. [slides](core.odp) [notes](core.md)
 
-- **Seminar 3**: Perception - the rise of convolutional neural networks
+- **Perception** - rise of the convolutional neural networks.
 
-- **Seminar 4**: Action - reinforcement Learning.
+- **Action** - reinforcement Learning, from TD-Gammon to AlphaGo.
 
-- **Seminar 5**: Philosophy and ethics -  the future of work; rights and responsibilities; malevolent AI and the singularity.
+- **Philosophy and ethics** - the future of work; rights and responsibilities; malevolent AI and the singularity.
 
 ## Assessment 
 

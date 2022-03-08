@@ -37,11 +37,11 @@ The third key abstraction is that an input activation is calculated by taking an
 
 Putting it all together, the activation of a neuron is the sum of outputs of other neurons it is connected to, each multiplied by the connection weights between those neurons.
 
-OK, time to test your understanding so far. In this example, there are two input neurons, with activations of 0.8 and 1.0. The first has a connection strength of 0.25, the other of .01. What's the output activation of the neuron? (The answer is 0.21).
+OK, time to test your understanding so far. In te first example on the slides, there are two input neurons, with activations of 0.8 and 1.0. The first has a connection strength of 0.25, the other of .01. What's the output activation of the neuron? (The answer is 0.21).
 
-OK, one more. Note that's a minus 1 there, not a 1. (The answer is -0.45). 
+In the second example, note that's a minus 1 there, not a 1. (The answer is -0.45). 
 
-A couple of things to notice in that example. 
+A couple of things to notice in that second example:
 
 First, that connections can have a negative weight. We call these _inhibitory_ connections because the more one neuron fires, the more it inhibits the firing of the neuron it's connected to. 
 
@@ -156,7 +156,7 @@ The reason from psychology is that the Bush-Mosteller system is not a good model
 
 Let's look at blocking in the case of a simple animal experiment. A mouse first repeatedly observes that a light is followed by food. It learns to salivate to the light. Next a tone is presented at the same time as the light, again followed by food. This also happens multiple times. Finally, the tone is presented alone, without the light. 
 
-What does the Bush-Mosteller system predict in this case? Thoughts?
+What does the Bush-Mosteller system predict in this case? 
 
 Well, if you pair light with food often enough, the association will go to 1, and then stop. Now, when you present the tone and light together, the association to the light won't increase any further, but the association between tone and food will go to one. So, when the tone is presented without the light, the mouse expects food and so salivates.
 
@@ -172,9 +172,7 @@ In some ways, that's a bit of a weird idea if there's more than two neurons. For
 
 One could argue about whether that's a problem or not. I mean, one way you could fix that is to have an activation function, like we discussed earlier, so that output activation did not exceed one. But, the Rescorla-Wagner theory takes the position that learning should stop when the sum of the input activations matches the teaching signal. In other words, when the outcome - food - is fully predicted. This idea allows it to predict blocking.
 
-Let's see how that works. 
-
-When the food and light are presented together, the association between them rises to one and stops, just like in Bush-Mosteller.
+Let's see how that works. When the food and light are presented together, the association between them rises to one and stops, just like in Bush-Mosteller.
 
 However, now the tone comes along. The food is already fully predicted by the light, and so from the perspective of Rescorla-Wagner, there's nothing to learn. The weight between tone and food remains at zero. This is often described as error-correcting learning - we only learn to the extent we need to in order to avoid errors.
 
@@ -299,6 +297,11 @@ There have been various ideas for solving the catastrophic interference problem 
 
 One fairly ironic thing is that, while backprop was largely responsible for bringing brain-inspired AI back to popularity, it did so by making it less brain-like. The backprop algorithm requires one to calculate error, and pass it _back_ along the connection. Neurons just do not work like that, activation goes in one direction down a neural connection, not both. There have been various ideas for a more neurally plausible version of backprop, but they are beyond the scope for today.
 
+## Summary
+
+This brings us to the end of the first section of the course. We've seen how people have been interested in AI since at least Ancient Greece, and that by the middle of the 20th century we knew enough about the brain to start to build brain-like systems on a computer. These systems are composed of nodes, which have activation. The nodes are connected together with links, which have weights. Activation passes through the network via those weight connections. The nodes represent things, and the weights store knowledge about the relationship between those associations. In order to build an AI, we could in principle set each of those connections by hand, but this is not particularly practical in practice. Instead, we use learning rules so that the network can learn for itself. 
+
+We traced the development of learning rules from simple Hebbian learning ("cells that fire together wire together") through to the delta rule (aka Rescorla-Wagner). We noted that the delta rule will learn anything that can be represented in a single-layer network, and this discovery led to a lot of excitement in the late 1950s and early 1960s that we were on the verge of making an Artificial General Intelligence. However, it became apparent that the problem was much harder than it first appeared. Single-layer networks are limited in what they can learn, and in order to solve that problem one has to build mult-layer networks. Multilayer feedforward networks are very powerful - with enough hidden units they can represent any deterministic mapping between input and output. We can also get multilayer networks to learn those mappings for themselves by using backpropagation of error. Backprop is probably the single most important component of modern brain-inspired AI, but it also has some limitations. First, although, a multilayer network can represent any mapping, backprop is not guaranteed to find that mapping - it can become stuck in local minima. Second, while backprop is OK for the initial training of a network, it's problematic after that because backprop nets suffer from catastrophic interference - information learned later wipes out information learned earlier to a much greater degree that humans (except perhaps Homer Simpson). Finally, and somewhat ironically, backprop does things that seem unlikely to happen in the brain, so it moves these originally brain-inspired systems further away from their source of inspiration.
 
 ## Suggested further reading
 
