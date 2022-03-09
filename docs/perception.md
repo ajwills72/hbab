@@ -24,13 +24,13 @@ The multilayer networks we covered in the last section of the course are not tha
 
 First, traditional networks are quite shallow, often with only one hidden layer, while the primate visual system has [many layers](van1992information.pdf)
 
-Second, traditional networks are _densely connected_, in other words, every neuron in layer 1 is connected to every neuron in layer 2. The brain is generally much more _sparsely_ connected - there are many fewer connections than in a densely connected system. 
+Second, traditional networks are _densely connected_, in other words, every neuron in layer 1 is connected to every neuron in layer 2 and so on. The brain is generally much more _sparsely_ connected - there are many fewer connections than in a densely connected system. 
 
-Third, this sparse connection is not random. Neurons in early visual cortex have simple _receptive fields_, i.e. they respond only to stimulation in a particular area of the visual field. And, as we've known since the work of Hubel and Weisel in the early 1960s, there is _neuronal tuning_, i.e. different neurons respond to different patterns in their receptive fields. For example, one might respond most to a vertical line, responding less as the line becomes less vertical. Another might respond most to a horizontal line, and so on. 
+Third, this sparse connectivity is not random. Neurons in early visual cortex have simple _receptive fields_, i.e. they respond only to stimulation in a particular area of the visual field. And, as we've known since the work of Hubel and Weisel in the early 1960s, there is _neuronal tuning_, i.e. different neurons respond to different patterns in their receptive fields. For example, one might respond most to a vertical line, responding less as the line becomes less vertical. Another might respond most to a horizontal line, and so on. 
 
 Fourth, as we go deeper into visual cortex, the cells become more [complex](https://en.wikipedia.org/wiki/Complex_cell), for example less sensitive to the position of the line in the receptive field. 
 
-Many of these properties were built into Kunihiko Fukushima's [Neocognitron](https://en.wikipedia.org/wiki/Neocognitron), which was published in 1980 and is the first example of what came to be known as a convolutional neural network. However, as with so much of the history of brain-inspired AI, it would be decades before this approach to object classification became dominant.
+Many of these properties were built into Kunihiko Fukushima's ([pronounciation](https://www.howtopronounce.com/kunihiko-fukushima))  [Neocognitron](https://en.wikipedia.org/wiki/Neocognitron), which was published in 1980 and is the first example of what came to be known as a convolutional neural network. However, as with so much of the history of brain-inspired AI, it would be decades before this approach to object classification became dominant.
 
 ## LeNet
 
@@ -58,21 +58,42 @@ However, it's a bit more complex in this second filter, because the input is not
 
 Note: Any given 3D filter in LeNet only takes connections from 8 of the 12 2D filters, but I've ignored this for simplicity here, and because in more modern CNNs, all filters from the previous layer tend to be used. 
 
+### Dense layers
+
+Having developed a set of feature representations, the rest of LeNet is just a standard one hidden-layer network. Each of the 192 hidden units in the second convolutional layer are connected to each of the 30 units units in the next layer. Then, each of these 30 hidden units is connected to each of the ten output units (one for each of the digits being classified: 0 to 9). 
+
+### Training with backprop
+
+LeCun then trained the network using backprop; the network was trained on 7291 examples of single handwritten digits and was presented with each 23 times, for a total of 167693 training trials. It went on to make 5% errors on a test set of digits it had not seen before. 
+
+In summary, LeNet could learn to classify handwritten digits from their images. Using a digital camera and a computer with some custom hardware, LeNet could classify the digits in US zip codes at around 10 digits a second with a 5% error rate. This is in the rough area of human-level performance in terms of accuracy, and arguably faster than people, too. Brain-inspired AI was able to solve the human-easy, AI-hard problem of digit recognition back in 1989. However, it learned very slowly and needed a very large set of examples to learn from  - needing almost 170,000 training trials across 7,000 different examples to learn 10 digits. 
+
+## AlexNet
+
+### Big data, big compute
+
+It would take the field 20 years to get from the classification of handwritten digits to the classification of real-world objects ... like dogs, pigs, and loaves of bread. Why so long? It's tempting to assume that we were waiting for some brilliant insight, some breakthrough in the algorithms, that would allow the networks to learn at a more human-like rate. But no, progress in the field came from two sources. 
+
+First, computing power has grown exponentially since 1970 ([Moore's Law](https://en.wikipedia.org/wiki/Moore%27s_law)). Around 2006, much of this [continued growth](https://www.nextbigfuture.com/2017/04/for-commoners-using-cpus-meaningful.html) came from hardware designed to play games - graphics cards (GPUs). It turned out that the sort of calculations one needs to make great graphics in games are similar to those one needs to train brain-inspired AI. In 2010, Dan Ciresan showed the potential of GPUs for deep learning, and the field quickly adopted this idea.
+
+Second, when LeNet was published in 1989, there was no World Wide Web (1993), and no consumer-level digital cameras, let alone smartphones (2007). So, getting the very large sets of labelled pictures one would need to train a neural network was very difficult. However, by 2009, [ImageNet](https://en.wikipedia.org/wiki/ImageNet) had been launched - an online database that now contains around 14 million images - around several hundred images for common categories, and around 20,000 different categories of object. 
+
+With these two revolutions in place, things moved quite quickly - within three years, AlexNet - a convolutional neural network trained on ImageNet using two GPUs - had won an international image classification competition, substantially beating the runner-up. Everything had come together at the right time, and AlexNet became massively influential, both in research, and in the real world. 
+
+In research, the AlexNet paper has now been cited over [100,000 times](https://scholar.google.co.uk/scholar?hl=en&as_sdt=0%2C5&q=ImageNet+Classification+with+Deep+Convolutional+Neural+Networks&btnG=) - to give you a sense of scale, everything I've ever published in a 30-year career has been cited around [2,000 times](https://scholar.google.com/citations?user=SXkN-cgAAAAJ&hl=en&oi=ao) _in total_.
+
+In the real-world, the startup company created by the authors of AlexNet was [acquired by Google](https://www.utoronto.ca/news/google-acquires-u-t-neural-networks-company) a year later, in 2013. Thus began a massive headhunt, with the top cognitive scientists who had spent long academic careers in these areas suddenly moving, part- or full-time, to major tech companies. [Geoff Hinton](https://en.wikipedia.org/wiki/Geoffrey_Hinton) and Alex Krischevsky joined Google as part of that acquisition. Yann LeCun joined facebook (now Meta). Peter Dayan joined Uber. Tesla. Microsoft
+
+Yan LeCunn
+Peter Dayan
+
 
 
 ## Plan
    
-- LeNet (LeCun, 1989)
-
-   - The convolutional filter
-   
-   - Ending with a dense network
-   
-   - Training with backprop
-   
-   - Practical use
 
 - AlexNet (Krizhevsky, Sutrskever, Hinton, 2012)
+
 
    - Colour
 
@@ -138,6 +159,10 @@ Note: Any given 3D filter in LeNet only takes connections from 8 of the 12 2D fi
 - [Neuroscience of the visual cortex](https://en.wikipedia.org/wiki/Visual_cortex)
 
 - [Convolutional neural networks](https://en.wikipedia.org/wiki/Convolutional_neural_network)
+
+- [History of GPU use for CNNs](https://people.idsia.ch/~juergen/computer-vision-contests-won-by-gpu-cnns.html)
+
+- [History of machine learning](https://labelyourdata.com/articles/history-of-machine-learning-how-did-it-all-start)
 
 - [AlexNet](https://en.wikipedia.org/wiki/AlexNet)
 

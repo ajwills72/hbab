@@ -122,6 +122,8 @@ In order of appearance (roughly):
 
 - [SUN-4/260](http://computermuseum.informatik.uni-stuttgart.de/dev/sun4_260/)
 
+- [Fukushima](https://labelyourdata.com/articles/history-of-machine-learning-how-did-it-all-start)
+
 ## Demonstrations in keras
 
 - [Minimal XOR solving with backprop](https://github.com/conwayok/keras-xor-example/blob/master/keras-xor-example/train.py)
