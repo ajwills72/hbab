@@ -72,7 +72,7 @@ In summary, LeNet could learn to classify handwritten digits from their images. 
 
 ### Big data, big compute
 
-It would take the field 20 years to get from the classification of handwritten digits to the classification of real-world objects ... like dogs, pigs, and loaves of bread. Why so long? It's tempting to assume that we were waiting for some brilliant insight, some breakthrough in the algorithms, that would allow the networks to learn at a more human-like rate. But no, progress in the field came from two sources. 
+It would take the field 20 years to get from the classification of handwritten digits to the classification of real-world objects ... like dogs, pigs, and loaves of bread. Why so long? It's tempting to assume that we were waiting for some brilliant insight, some breakthrough in the algorithms, that would allow the networks to learn at a more human-like rate. But no, progress in the field primarily came from two sources. 
 
 First, computing power has grown exponentially since 1970 ([Moore's Law](https://en.wikipedia.org/wiki/Moore%27s_law)). Around 2006, much of this [continued growth](https://www.nextbigfuture.com/2017/04/for-commoners-using-cpus-meaningful.html) came from hardware designed to play games - graphics cards (GPUs). It turned out that the sort of calculations one needs to make great graphics in games are similar to those one needs to train brain-inspired AI. In 2010, Dan Ciresan showed the potential of GPUs for deep learning, and the field quickly adopted this idea.
 
@@ -86,70 +86,101 @@ In the real-world, the startup company created by the authors of AlexNet was [ac
 
 ### Structure of AlexNet
 
+So, how does AlexNet differ from LeNet? Here, I'm going to give a simplified description, for full details read the [AlexNet paper](krizhevsky2012imagenet.pdf). In particular, I'm not going to cover the concept of _max pooling_, which is used in AlexNet but is now increasingly considered to cause problems and is not a major feature of most state-of-the-art models today. I'm also not going to cover their techniques of _data augmentation_ - basically taking the set of training images and generating many more images from them by using automated PhotoShop-like techniques. 
+
+Basically, though, having faster computers and bigger sets of images meant that we now had enough computing power and enough training items to train much larger, more complex networks. AlexNet was more complex that LeNet in the following ways:
+
+**Hi-res colour**: AlexNet is designed to use higher-resolution, coloured images. LeNet took images that were 16 x 16 pixel black-and-white images. AlexNet takes 256 x 256 pixel images in full colour. Handling higher resolution is just a matter of more computing power, but handling colour needed some modification. In AlexNet, the three colour channels of the image - red, blue, and green - are used as the input to a 3D convolutional layer. So, while LeNet uses 2D convolution on layer 1 and 3D convolution in layer 2, ALexNet uses 3D convolution from the outset.
+
+**Deeper**: The convolutional part of AlexNet is much deeper than LeNet. LeNet had two convolutional layers, while AlexNet has five convolutional layers. Similarly, LeNet has two dense layers, while AlexNet has three. The authors were able to demonstrate that the depth of AlexNet was important to its performance - training a version of AlexNet with even one less convolutional layer led to worse performance. 
+
+**ReLU**:  Since the 80s, neural networks typically used a sigmoid activation function or similar. AlexNet uses a rectified linear (ReLU) system, where if the input is negative, the output is zero, otherwise the output is the same as the input. Nair and Hinton had come up with this idea a couple of years earlier, and in the AlexNet paper they report simulations that show this change of activation function speeds learning by a factor of six. Given AlexNet took around 6 days to train, this makes a big real-world difference - without ReLU, AlexNet would likely take more than a month to train. One irony of ReLU, as with backprop, is that it isn't neurally plausible - neurons have a maximum firing rate as well as a minimum firing rate, and this was one of the original inspirations of the sigmoid function.
+
+**Grouping**: There were a couple of other things AlexNet did. The first one was considered by them to be a "hack" to get around hardware limitations, but was later discovered to improve performance. This was 20012, and AlexNet needed too much memory to fit on a single GPU card of the time. So, they split the network across two cards, and they did this by splitting the filters - so half the filters for a given layer run on one graphics card and the other on the second graphics card. As well as solving the technical problem, it simplifies the network - there are fewer connections in total, and it turns out this improves performance (ResNeXt). We'll come back later to why that might be. 
+
+**Dropout**: The other thing they did, quite deliberately to improve performance in this case, was to use _dropout_. Dropout is where, on every training trial, you ignore a random 50% of the connections in a layer. These ignored connections don't pass activation forward, nor error back. It's a different 50% of connections each time. This roughly doubles the amount of time it takes to train the network, but it also improves its ultimate performance in much the same way as grouping does. Again, we'll come back to that later.
+
+## ResNet
+
+What's happened in this area in the last 10 years? For the purpose of this session, we're only going to go up to 2016, because that's when a research group at Microsoft introduced ResNet. Although that was a few years ago now, it's still pretty close to the state of the art.
+
+The period 2012 to 2016 was characterised by increasing the depth of the network. LeNet had 4 layers, while AlexNet had 8. So, more seemed like better - "we need to go deeper". Over the next few years this increased to 16 layers in VGG and around 30 layers in models like Inception. This did lead to perfomance gains, so the strategy seemed justified.
+
+The thing was, though, as the networks got deeper, they got harder and harder to train. A number of approaches were taken to address this, but the ResNet team brought to the world's attention that the problem remained unsolved.
+
+The ResNet team included lead author Kaiming He, and senior scientist Jian Sun, both working at Microsoft Research, an offshoot of the company that brought you Microfost Windows, and Microsoft Office. This team pointed out that deeper networks were not just harder to train; after a certain point their terminal performance at the end of training was not as good as a shallower network. 
+
+This is very odd. A deeper network never needs to be worse than a shallower network. The easiest way to see this is to take the shallower network and add a number of layers that do nothing but copy the input they get and pass it to the next layer (these are called _identity_ layers). You can add as many of these layers as you like without changing the performance of the network. 
+
+The ResNet team therefore hypothesized that if you gave the network these identity mappings, it might learn better. So ResNet is made of builing blocks of some convolutional layers with a "shortcut" set of identity connections - they just pass the input of the building block to its output. The block's job is therefore to learn the mapping between the input and the output _minus_ the input. This is known as _residual_ learning, the term _residual_ coming from statistics, meaning what is left over after, for example, assuming the points fall on a straight line. (There was also another trick they used, called a _bottleneck building block_. We didn't cover this in class because [later work](https://arxiv.org/pdf/2003.13678.pdf) indicates that such bottlenecks do not help.) 
+
+With this concept of residual building block, the ResNet team were able to further increase the depth of their networks, first to 34 layers, then 50 layers, and ultimately 152 layers. In 2015, ResNet152 was state of the art. Things have not improved that much since then, and ResNet-like systems are still in use today in state-of-the-art applications.
+
+## Applied uses
+
+What are those applications? It's hard to be sure, because while companies such as facebook appear to be using AI extensively, getting details on exactly what they do and how can be tough. 
+
+One thing we do know is that the convolutional neural networks we've discussed can be used to [automatically detect pornographic images](https://arxiv.org/pdf/1511.08899.pdf) (Moustafa, 2015), and so there's a reasonable chance facebook and other social media companies use CNNs in this way to block pornographic content. 
+
+An area where we know CNNs are used is in self-driving cars. In summer 2021, Tesla did a [3-hour live stream](https://www.youtube.com/watch?v=j0z4FweCy4M) on how the AI works in their AutoPilot system. If you can spare the time, watch the whole thing, it's amazing. The [self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo) we viewed in class was from 2019; the
+
+Sections particularly relevant to this course are:
+
+- Demo of [full self-driving](https://www.youtube.com/watch?v=j0z4FweCy4M&t=2814s) 
+
+- 2019: [Tesla's full self-driving demo (2019)](https://www.youtube.com/watch?v=tlThdr3O5Qo)
 
 
+## Why so deep?
+
+So, brain-inspired neural networks are being used in real-world applications that, in some senses, allow machines to see. But why do they have so many layers? Earlier in the course, we covered the fact that any multilayer network with sufficient hidden units can represent any deterministic mapping between its inputs and its outputs. So, in principle, the other 150 layers of ResNet152 just aren't needed. So, why have these deeper, sparser, more brain-like systems been so successful?
+
+The answer is that, despite being deeper, CNNs are in fact simpler than traditional densely connected networks. A modern CNN takes images that are 224 x 224 x 3. So, they have about 150,000 input units. They classify that input into perhaps 1,000 categories. And it's not unusual for a densely connected network to have as many hidden units as input units (often, it's many more). But let's be conservative and say you only need half as many hidden as input units. This still gives you around 11 billion connections. ResNet50 has around 25 million parameters - that's about 400 times fewer connections. 
+
+Having fewer connections makes the network faster to train. It also reduces the networks' ability to _overfit_. Conceptually, we can think of overfitting as when a model tries to fit the noise in a set of data - the stuff that you would not see again if you collected the data again. In statistics, for example, we often fit a simple straight line model to data - we call this linear regression. Overfitting could be illustrated by instead connecting the data points in a dot-to-dot fashion. Such a line fits the data more closely, but is not particularly useful for predicting what will happen in future.
+
+In a similar way, if the number of connections in a network grows too large, it will tend of overfit the training sample. We can see this happening when we test the network on pictures it hasn't yet seen - if it's dramatically worse on these test items than on the training items, the likelihood is that the model is overly flexible, it has too many parameters, and it has overfit the training data.  CNNs, relative to dense networks, reduce the number of parameters and hence potentially reduce the chances of overfitting. 
 
 
-## Plan
-   
+## How good is the state of the art?
 
-- AlexNet (Krizhevsky, Sutskever, Hinton, 2012)
+How good are modern object recognition systems? Ancedotally, really good! There are plenty of examples, from about 2014 onwards, of both software engineers and neuroscientists claiming human-level performance for these systems. 
 
+We can put numbers to this. A relatively recent system - [PNASNet](https://openaccess.thecvf.com/content_ECCV_2018/papers/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.pdf) - scored over 95% accuracy on ImageNet. This sounds pretty impressive, until you notice that "Top 5" condition. To explain - when the model is presented with an image of say, a cat, we look at the five things the model thinks it is most likely to be. Now, let's say the model says it's most likely to be a hatstand, and if not an orange, but if it's not that they maybe a battleship, but if not a dandelion, but if not it's a cat ... then it counts as getting it right. This does not seem like such a great measure. A more realistic answer comes from what's called "Top 1" performance, also known as ... getting it right. On this basis, the model gets about a quarter of all images wrong, which doesn't necessarily sound that human-like.
 
-   - Colour
+But that's not the end of the story. As we already covered, these systems are trained on very large sets of images. In order to create such large sets, engineers trawl the internet. That's all very well, if the internet contains a representative subset of the objects in our world. But the evidence is that it doesn't. Andrei Barbu and colleagues, working at MIT, took what is quite a psychological approach to this problem and collected a [much better controlled set of images](https://proceedings.neurips.cc/paper/2019/file/97af07a14cacba681feacf3012730892-Paper.pdf). They did this by directing people, via their phones to take pictures of objects at a range of different angles and against a range of different backgrounds. However, the computer systems do appallingly on this more representative subset. In fact, they get most things wrong, with a Top-1 accuracy of around 30%. 
 
-   - Deeper 
+How good are people on these better-controlled images? Perhaps people would also struggle, given the variety of objects and backgrounds? We collected some data we have collected on this question.
 
-   - ReLu
-   
-   - Grouping
-   
-- Why so deep? (Universal approximator paradox) ... what does the neural inspiration bring? (Fewer parameters - easier to train, less overfitting)
+In this experiment we chose 10 categories of object from the Andrei Barbu's set. We didn't pick 10 categories at random. Rather, we picked 10 categories which, on the basis of simulations run by Andrei, were among the hardest for ResNet152. They're all pretty every day types of category, which a priori we would think people would be reasonably competent at classifying. For each of the 10 categories, we sampled 30 example pictures, giving us 300 images in total. Each image was presented for a fixed amount of time, then removed. The participant then has as much time as they like to make their selection by pressing the appropriate number key. The numbered list remains on the screen when the picture disappears, so performance on this task is presumably driven mainly by object recognition performance rather than, say, difficulty in using the response system. 
 
-   - The problem of overfitting
+We used two different presentation times - 200 ms and 1000 ms. The relevance of 200 ms is that systems like ResNet are feedforward only. The brain's visual system is recurrent - in other words it also has feedback links -  but at 200ms there is little time for recurrent activity, reducing the humans to (approximately) a feedforward system. We chose 1000ms as a longer-interval comparison, while keeping it short enough for the whole experiment to fit within a single 30 minute session. 
 
-- Big Tech wakes up
+As we can see from this slide, people were way better than a leading AI system. The blue bars, somewhat misleadingly labelled 'as objectnet' are in fact the performance of ResNet152 - a leading AI system - on these ten categories. The comparison is only approximate, because the ResNet results come from Andrei's paper, and are hence assessed across all the images in his set for each category -- rather than the subset of 30 images per category we showed the participants. Nonetheless, it gives us a ball park figure, which is that ResNet is between 1% and about 13% accurate, depending on the category. Even at 200ms, people are much better than this - generally between 80% and 90% accurate.
 
-   - Purchase of the AlexNet company by Google
-   
-   - The great head hunt (facebook, Uber, Microsoft)
+## How do we improve the state of the art?
 
-- ResNet (Microsoft, 2016)
+Clearly, there is a problem to solve. Artificial neural networks, which at first sight seem quite good at object recognition and also quite neurally inspired, turn out to be really brittle. Do psychology or neuroscience hold any clues? As I mentioned earlier, one difference was that the machines are feedforward while the human brain also has feedback connections. This may be part of the answer, but the high accuracy people show at 200 ms in our study suggests that even the feed forward part of the human system well exceeds machine performance. So, what are the machines doing wrong? Well, perhaps they are not human enough. Because, despite superificial similarities, these systems are not currently that human like.
 
-   - Close to state of the art
+For example, for humans, the overall shape of an object is among the most important things that identify it as that object. The shillouette at the top left is clearly a camel. The one on the bottom left is not a camel - or, at least, a horribly injured or deformed one. To the machine, these are equally good examples of camels ( [Baker et al., 2018](https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1006613&type=printable)).
 
-   - Going deeper
-   
-   - Solving the network degradation problem
-   
-   - The idea of a Residual Network
+Another example - or perhaps the other side of the same coin - is that these machine systems have a very strong prior to select the simplest solution. In a study by [Malhotra et al.](https://cpb-eu-w2.wpmucdn.com/blogs.bristol.ac.uk/dist/1/411/files/2021/05/1-s2.0-S0042698920300742-main.pdf), the images the machine is trained on have a single pixel -- near invisible to the human eye -- that perfectly predicts the category membership of the item. The system correctly classifies the objects when that pixel is preserved. However, it gets all the answers wrong when that single pixel is changed to one that predicts a different category. Even if you take the single pixel out, rather than replacing it with a misleading one, the machine systems suffer a very substantial loss of accuracy. People, presumably, don't suffer from this kind of problem. 
 
-- Applied uses
+I think the direction one needs to go in, in terms of the development of these machine systems, is to work on making them less brittle. And, the human brain seems like a pretty good exemplar of a system that does not break so easily as the machine systems. So, perhaps the way forward here is to develop machine systems that are more human like. For example, work by [Evans et al. (2022)](https://cpb-eu-w2.wpmucdn.com/blogs.bristol.ac.uk/dist/1/411/files/2022/02/1-s2.0-S0893608021004780-main.pdf), who have attempted to build machine systems whose lower layers are more directly modelled on the known properties of early visual cortex, and there seem to be some interesting results there.
 
-   - Content monitoring at facebook
-   
-   - Self-driving cars
+## Summary
 
-- How good is state of the art?
- 
-   - The belief (Yamins & DiCarlo, 2016)
-   
-   - Top-5 accuracy
-   
-   - Top-1 accuracy
-   
-   - Objects in the real world (Barbu et al., 2019)
-   
-   - Overly-sensitive to tiny changes (Malhorta et al., 2020)
-   
-   - Insufficiently sensitive to shape (Baker et al., 2018)
-   
-- How do we make it better?
+By 1997, computers could beat the best humans in the world at playing chess, but apparently simple tasks like classifying everyday objects turned out to be much harder. The brain-inspired roots of trying to solve this simple-hard problems of everyday life start in 1980, when Fukushima built a network that was more like the primate brain than the systems we'd previously looked at. His neocognitron was deeper - it had more layers of connections. It was sparser - there were fewer connections. And these connections were not random, they were arranged into receptive fields. In 1989, Yann LeCun published the first modern network of this type, networks that came to be known as convolutional neural networks. His creation, LeNet, could classify handwritten digits to high levels of accuracy. 
 
-   - Take the neuroscience more seriously
-   
-   - Bias the learning rules against simple solutions. 
+It would take more than 20 years to get from handwritten digits to photographs of everday objects. Not much changed in those 20 years in terms of the basic design of these CNNs - what changed was that we got a lot more computing power. And, thanks to the internet, we got access to very large sets of images to train the networks on. These things came together in AlexNet in 2012, a massively influential brain-like system that beat less brain-like systems in a major competition. AlexNet was deeper than LeNet, and also used some design improvements, like ReLU and dropout. 
 
+The next four years was a period of rapid development, with CNNs getting progressively deeper. One barrier to increasing depth was the network degradation problem - as networks got beyond about 20 layers, their performance on the training items got worse. In principle, this should never happen because the deeper networks could always just copy the output of the shallower network across its extra levels. This insight les the ResNet team to explicitly include these identity connections as shortcuts in the network. This was sufficient to allow very deep networks, with ResNet152 have 152 layers of connections. 
+
+The use of CNNs for object recognition began to become commerical from around 2013. Today, most Big Tech companies use CNNs as part of their AI systems. For example, it seems likely that facebook use them for content moderation, and we know that they form part of the self-driving AutoPilot system in Tesla cars.
+
+The success of CNNs is in some ways paradoxical. We know that multilayer nets are universal approximators, so in principle anything that ResNet152 does with all it's layers could be done with just two layers of connections. One of the advantages of CNNs is that they are, despite their depth, much less complex than a shallow, fully-connected network. This makes them easier to train, and it also seems to make them less prone to over-fitting. 
+
+For about a decade now, people have been claiming that CNNs had reached human levels of performance in object classification. This claim does not seem to be well founded, as a series of studies from around 2018 onwards has demonstrated. Real-world classification performance of CNNs sits around 70% errors according to the ObjectNet benchmarks, while people generally make fewer than 10% errors on the same benchmarks. Also humans, quite sensibly, use shape as a primary predictor of object categories, while networks do not and so end up making some odd decisions. They are also overly sensitive to minute, irrelevant details in images in a way people are not. Perhaps further work in making these systems more like primates will help.
 
 ## Further reading
 
@@ -163,6 +194,15 @@ In the real-world, the startup company created by the authors of AlexNet was [ac
 
 - [AlexNet](https://en.wikipedia.org/wiki/AlexNet)
 
+- [VGG](https://arxiv.org/pdf/1409.1556.pdf)
+
+- [Real-world applications of machine learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7983091/pdf/42979_2021_Article_592.pdf)
+
+- [Machine learning at Big Tech companies](https://medium.datadriveninvestor.com/how-machine-learning-is-applied-at-big-tech-companies-73b11cd79745)
+
+- [Anything by the Bristol Generalization Group](https://mindandmachine.blogs.bristol.ac.uk/publications/)
+
 ### Very mathematical
 
 - [Universal approximation theoreom](https://en.wikipedia.org/wiki/Universal_approximation_theorem)
+

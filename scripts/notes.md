@@ -124,6 +124,18 @@ In order of appearance (roughly):
 
 - [Fukushima](https://labelyourdata.com/articles/history-of-machine-learning-how-did-it-all-start)
 
+- [ImageNet examples](http://i.bnet.com/blogs/screen-shot-2012-11-21-at-82123-am.png)
+
+- [ReLU](https://medium.com/ai%C2%B3-theory-practice-business/the-rectified-linear-unit-relu-and-kaiming-initialization-4c7a981dfd21)
+
+- [We need to go deeper](https://www.moillusions.com/stereograms-inspired-film-inception/)
+
+- [Kaiming He](http://kaiminghe.com/)
+
+- [Jian Sun](http://www.jiansun.org/)
+
+- [Overfitting](https://medium.com/greyatom/what-is-underfitting-and-overfitting-in-machine-learning-and-how-to-deal-with-it-6803a989c76)
+
 ## Demonstrations in keras
 
 - [Minimal XOR solving with backprop](https://github.com/conwayok/keras-xor-example/blob/master/keras-xor-example/train.py)
