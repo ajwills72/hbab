@@ -82,17 +82,18 @@ With these two revolutions in place, things moved quite quickly - within three y
 
 In research, the AlexNet paper has now been cited over [100,000 times](https://scholar.google.co.uk/scholar?hl=en&as_sdt=0%2C5&q=ImageNet+Classification+with+Deep+Convolutional+Neural+Networks&btnG=) - to give you a sense of scale, everything I've ever published in a 30-year career has been cited around [2,000 times](https://scholar.google.com/citations?user=SXkN-cgAAAAJ&hl=en&oi=ao) _in total_.
 
-In the real-world, the startup company created by the authors of AlexNet was [acquired by Google](https://www.utoronto.ca/news/google-acquires-u-t-neural-networks-company) a year later, in 2013. Thus began a massive headhunt, with the top cognitive scientists who had spent long academic careers in these areas suddenly moving, part- or full-time, to major tech companies. [Geoff Hinton](https://en.wikipedia.org/wiki/Geoffrey_Hinton) and Alex Krischevsky joined Google as part of that acquisition. Yann LeCun joined facebook (now Meta). Peter Dayan joined Uber. Tesla. Microsoft
+In the real-world, the startup company created by the authors of AlexNet was [acquired by Google](https://www.utoronto.ca/news/google-acquires-u-t-neural-networks-company) a year later, in 2013. Thus began a headhunt, with the top cognitive scientists who had spent long academic careers in these areas suddenly moving, part- or full-time, to major tech companies. [Geoff Hinton](https://en.wikipedia.org/wiki/Geoffrey_Hinton) joined Google and Yann LeCun [joined facebook](https://www.linkedin.com/in/yann-lecun/) the following year.
 
-Yan LeCunn
-Peter Dayan
+### Structure of AlexNet
+
+
 
 
 
 ## Plan
    
 
-- AlexNet (Krizhevsky, Sutrskever, Hinton, 2012)
+- AlexNet (Krizhevsky, Sutskever, Hinton, 2012)
 
 
    - Colour
@@ -101,11 +102,7 @@ Peter Dayan
 
    - ReLu
    
-   - Big data
-   
-   - GPUs (precursors)
-   
-   - Highly inspirational
+   - Grouping
    
 - Why so deep? (Universal approximator paradox) ... what does the neural inspiration bring? (Fewer parameters - easier to train, less overfitting)
 
