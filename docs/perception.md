@@ -74,7 +74,7 @@ In summary, LeNet could learn to classify handwritten digits from their images. 
 
 ### Big data, big compute
 
-It would take the field 20 years to get from the classification of handwritten digits to the classification of real-world objects ... like dogs, pigs, and loaves of bread. Why so long? It's tempting to assume that we were waiting for some brilliant insight, some breakthrough in the algorithms, that would allow the networks to learn at a more human-like rate. But no, progress in the field primarily came from two sources. 
+It would take the field 20 years to get from the classification of handwritten digits to the classification of real-world objects ... like dogs, pigs, and loaves of bread. Why so long? It's tempting to assume that we were waiting for some brilliant insight, some breakthrough in the algorithms, that would allow the networks to learn at a more human-like rate. To a limited extent, that is true but mostly, progress in the field primarily came from two other sources. 
 
 First, computing power has grown exponentially since 1970 ([Moore's Law](https://en.wikipedia.org/wiki/Moore%27s_law)). Around 2006, much of this [continued growth](https://www.nextbigfuture.com/2017/04/for-commoners-using-cpus-meaningful.html) came from hardware designed to play games - graphics cards (GPUs). It turned out that the sort of calculations one needs to make great graphics in games are similar to those one needs to train brain-inspired AI. In 2010, Dan Ciresan showed the potential of GPUs for deep learning, and the field quickly adopted this idea.
 
@@ -96,17 +96,17 @@ Basically, though, having faster computers and bigger sets of images meant that 
 
 **Deeper**: The convolutional part of AlexNet is much deeper than LeNet. LeNet had two convolutional layers, while AlexNet has five convolutional layers. Similarly, LeNet has two dense layers, while AlexNet has three. The authors were able to demonstrate that the depth of AlexNet was important to its performance - training a version of AlexNet with even one less convolutional layer led to worse performance. 
 
-**ReLU**:  Since the 80s, neural networks typically used a sigmoid activation function or similar. AlexNet uses a rectified linear (ReLU) system, where if the input is negative, the output is zero, otherwise the output is the same as the input. Nair and Hinton had come up with this idea a couple of years earlier, and in the AlexNet paper they report simulations that show this change of activation function speeds learning by a factor of six. Given AlexNet took around 6 days to train, this makes a big real-world difference - without ReLU, AlexNet would likely take more than a month to train. One irony of ReLU, as with backprop, is that it isn't neurally plausible - neurons have a maximum firing rate as well as a minimum firing rate, and this was one of the original inspirations of the sigmoid function.
+**ReLU**:  Since the 80s, neural networks typically used a sigmoid activation function or similar. AlexNet uses a rectified linear (ReLU) system, where if the input is negative, the output is zero, otherwise the output is the same as the input. [Nair and Hinton](https://icml.cc/Conferences/2010/papers/432.pdf) had come up with this idea a couple of years earlier, and in the AlexNet paper they report simulations that show this change of activation function speeds learning by a factor of six. Given AlexNet took around 6 days to train, this makes a big real-world difference - without ReLU, AlexNet would likely take more than a month to train. One irony of ReLU, as with backprop, is that it isn't neurally plausible - neurons have a maximum firing rate as well as a minimum firing rate, and this was one of the original inspirations of the sigmoid function.
 
-**Grouping**: There were a couple of other things AlexNet did. The first one was considered by them to be a "hack" to get around hardware limitations, but was later discovered to improve performance. This was 20012, and AlexNet needed too much memory to fit on a single GPU card of the time. So, they split the network across two cards, and they did this by splitting the filters - so half the filters for a given layer run on one graphics card and the other on the second graphics card. As well as solving the technical problem, it simplifies the network - there are fewer connections in total, and it turns out this improves performance (ResNeXt). We'll come back later to why that might be. 
+**Grouping**: There were a couple of other things AlexNet did. The first one was considered by them to be a "hack" to get around hardware limitations, but was later discovered to improve performance. This was 2012, and AlexNet needed too much memory to fit on a single GPU card of the time. So, they split the network across two cards, and they did this by splitting the filters - so half the filters for a given layer run on one graphics card and the other on the second graphics card. As well as solving the technical problem, it simplifies the network - there are fewer connections in total, and it turns out this improves performance - see the ResNeXt model [Xie et al., 2017](https://arxiv.org/pdf/1611.05431.pdf). We'll come back later to why that might be. 
 
-**Dropout**: The other thing they did, quite deliberately to improve performance in this case, was to use _dropout_. Dropout is where, on every training trial, you ignore a random 50% of the connections in a layer. These ignored connections don't pass activation forward, nor error back. It's a different 50% of connections each time. This roughly doubles the amount of time it takes to train the network, but it also improves its ultimate performance in much the same way as grouping does. Again, we'll come back to that later.
+**Dropout**: The other thing they did, quite deliberately to improve performance in this case, was to use _dropout_. Dropout is where, on every training trial, you ignore a random 50% of the connections in a layer. These ignored connections don't pass activation forward, nor error back. It's a different 50% of connections each time. This roughly doubles the amount of time it takes to train the network, but it also improves its ultimate performance in much the same way as grouping does - see [Hinton et al. (2012)](https://arxiv.org/pdf/1207.0580.pdf). Again, we'll come back to that later.
 
 ## ResNet
 
-What's happened in this area in the last 10 years? For the purpose of this session, we're only going to go up to 2016, because that's when a research group at Microsoft introduced ResNet. Although that was a few years ago now, it's still pretty close to the state of the art.
+What's happened in this area in the last 10 years? For the purpose of this session, we're only going to go up to 2016, because that's when a research group at Microsoft introduced ResNet ([He et al., 2016](https://arxiv.org/pdf/1512.03385v1.pdf)). Although that was a few years ago now, it's still pretty close to the state of the art.
 
-The period 2012 to 2016 was characterised by increasing the depth of the network. LeNet had 4 layers, while AlexNet had 8. So, more seemed like better - "we need to go deeper". Over the next few years this increased to 16 layers in VGG and around 30 layers in models like Inception. This did lead to perfomance gains, so the strategy seemed justified.
+The period 2012 to 2016 was characterised by increasing the depth of the network. LeNet had 4 layers, while AlexNet had 8. So, more seemed like better. Over the next few years this increased to 16 layers in [VGG](ttps://arxiv.org/pdf/1409.1556.pdf) and around 30 layers in models like [Inception](https://arxiv.org/pdf/1409.4842v1.pdf). This did lead to perfomance gains, so the strategy seemed justified.
 
 The thing was, though, as the networks got deeper, they got harder and harder to train. A number of approaches were taken to address this, but the ResNet team brought to the world's attention that the problem remained unsolved.
 
@@ -116,7 +116,7 @@ This is very odd. A deeper network never needs to be worse than a shallower netw
 
 The ResNet team therefore hypothesized that if you gave the network these identity mappings, it might learn better. So ResNet is made of builing blocks of some convolutional layers with a "shortcut" set of identity connections - they just pass the input of the building block to its output. The block's job is therefore to learn the mapping between the input and the output _minus_ the input. This is known as _residual_ learning, the term _residual_ coming from statistics, meaning what is left over after, for example, assuming the points fall on a straight line. (There was also another trick they used, called a _bottleneck building block_. We didn't cover this in class because [later work](https://arxiv.org/pdf/2003.13678.pdf) indicates that such bottlenecks do not help.) 
 
-With this concept of residual building block, the ResNet team were able to further increase the depth of their networks, first to 34 layers, then 50 layers, and ultimately 152 layers. In 2015, ResNet152 was state of the art. Things have not improved that much since then, and ResNet-like systems are still in use today in state-of-the-art applications.
+With this concept of residual building block, the ResNet team were able to further increase the depth of their networks, first to 34 layers, then 50 layers, and ultimately 152 layers. In 2016, ResNet152 was state of the art. Things have not improved that much since then, and ResNet-like systems are still in use today in state-of-the-art applications.
 
 ## Applied uses
 
@@ -124,7 +124,7 @@ What are those applications? It's hard to be sure, because while companies such 
 
 One thing we do know is that the convolutional neural networks we've discussed can be used to [automatically detect pornographic images](https://arxiv.org/pdf/1511.08899.pdf) (Moustafa, 2015), and so there's a reasonable chance facebook and other social media companies use CNNs in this way to block pornographic content. 
 
-An area where we know CNNs are used is in self-driving cars. In summer 2021, Tesla did a [3-hour live stream](https://www.youtube.com/watch?v=j0z4FweCy4M) on how the AI works in their AutoPilot system. If you can spare the time, watch the whole thing, it's amazing. The [self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo) we viewed in class was from 2019.
+An area where we know CNNs are used is in self-driving cars. In summer 2021, Tesla did a [3-hour live stream](https://www.youtube.com/watch?v=j0z4FweCy4M) on how the AI works in their AutoPilot system. If you can spare the time, watch the whole thing, it's the best introduction to state of the art in autonomous vehicles I've seen. The [self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo) we viewed in class was from 2019.
 
 ## Why so deep?
 
@@ -188,8 +188,6 @@ For about a decade now, people have been claiming that CNNs had reached human le
 - [History of machine learning](https://labelyourdata.com/articles/history-of-machine-learning-how-did-it-all-start)
 
 - [AlexNet](https://en.wikipedia.org/wiki/AlexNet)
-
-- [VGG](https://arxiv.org/pdf/1409.1556.pdf)
 
 - [Real-world applications of machine learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7983091/pdf/42979_2021_Article_592.pdf)
 
