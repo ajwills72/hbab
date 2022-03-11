@@ -12,9 +12,9 @@ If you’d like to know more about these topics, a great place to start would be
 
 ## Content
 
-- **History and core concepts** - from Ancient Greece to backprop. [slides](core.odp), [notes](core.md)
+- **History and core concepts** - from Ancient Greece to backprop. [slides](core.pdf), [notes](core.md), [worksheet](https://colab.research.google.com/drive/18GMjdVlSd8D7sdZmSFNq7wA7qRerE59Z?usp=sharing#scrollTo=K_3w9V669UVh)
 
-- **Perception** - rise of the convolutional neural networks. [slides](perception.odp), [notes](perception.md)
+- **Perception** - rise of the convolutional neural networks. [slides](perception.pdf), [notes](perception.md)
 
 ## Assessment 
 

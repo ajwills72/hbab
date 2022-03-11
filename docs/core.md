@@ -12,7 +12,7 @@ The pre-session videos were:
 
 ### Goals 
 
-The goals for this course  are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to today.  We'll also cover state-of-the-art research in perception and action. And, having learned the basics of where AI came from, and where it is today, we'll spend the some time  on the philosophical and ethical implications of AI. 
+The goals for this course  are to help you understand the history, and core concepts, of brain-inspired artificial intelligence, starting from when we began to realise the brain was an electrical network of neurons, through to today.  We'll also cover state-of-the-art research. And, having learned the basics of where AI came from, and where it is today, we'll spend the some time  on the philosophical and ethical implications of AI. 
 
 ### Diversity 
 
@@ -37,11 +37,9 @@ The third key abstraction is that an input activation is calculated by taking an
 
 Putting it all together, the activation of a neuron is the sum of outputs of other neurons it is connected to, each multiplied by the connection weights between those neurons.
 
-OK, time to test your understanding so far. In te first example on the slides, there are two input neurons, with activations of 0.8 and 1.0. The first has a connection strength of 0.25, the other of .01. What's the output activation of the neuron? (The answer is 0.21).
+**Time to test your understanding**. In the first example on the slides, there are two input neurons, with activations of 0.8 and 1.0. The first has a connection strength of 0.25, the other of .01. What's the output activation of the neuron? 
 
-In the second example, note that's a minus 1 there, not a 1. (The answer is -0.45). 
-
-A couple of things to notice in that second example:
+In the second example, note that's a minus 1 there, not a 1. Again, what's the output action? A couple of things to notice in that second example:
 
 First, that connections can have a negative weight. We call these _inhibitory_ connections because the more one neuron fires, the more it inhibits the firing of the neuron it's connected to. 
 
@@ -55,7 +53,9 @@ It's also plausible in the sense that neurons have a maximum, as well as a minim
 
 Finally - and this is beyond the scope of current course - the logistic function is very useful in a mathematical sense in that it is easy to calculate the derivative and the integral. This helps mathematicians to understand how these systems work, and this deeper understanding allows us to build better AI. 
 
-We'll come back to activation functions briefly in session 3, but for now we'll look at examples where it's OK to just add up the input activations.
+We'll come back to activation functions later on in this course, but for now we'll look at examples where it's OK to just add up the input activations.
+
+(The answer to the first question in this section is 0.21, and to the second question is -0.45).
 
 ## Storing knowledge
 
@@ -67,11 +67,11 @@ Let's get very slightly more complicated and say that for this dog, while a bell
 
 We can represent what the dog learns like this. If the bell representation is active (1), food is active (1). But if the bell and light are both active, food is inactive (0).
 
-What do the connection weights need to be in order for the neural network to store this information?
+**Test your understanding**: What do the connection weights need to be in order for the neural network to store this information?
 
 Take a moment to think about this. 
 
-Answer: $w_{B}$ must be one, so that the activation of the bell representation leads to the activation of the food representation. When bell and light are both present, the light must 'over rule' the bell. We can represent that by setting $w_{L}$ to minus one. This way the sum of the input activations times the weights is zero, which is what we want.
+Answer: w<sub>B</sub> must be one, so that the activation of the bell representation leads to the activation of the food representation. When bell and light are both present, the light must 'over rule' the bell. We can represent that by setting w<sub>L</sub> to minus one. This way the sum of the input activations times the weights is zero, which is what we want.
 
 Note that this leads to a prediction about the dog's future behaviour. The light has become an _inhibitor_, it will make the dog less likely to expect food. So if we, for example, now train the dog that a peppermint smell predicts food, and then later present the smell and the light together, the dog will salivate less to this peppermint-light compound than the peppermint on its own. This is called a _summation_ test and this is indeed the behaviour we observe. 
 
@@ -106,13 +106,11 @@ In neuroscience, this behaviour of neurons is called long-term potentiation. It 
 
 This idea, called Hebb's Law, can be expressed like this:
 
-$\Delta w_{1,2} = G.a_{1}.a_{2}$
+Δw<sub>1,2</sub> = G . a<sub>1</sub> . a<sub>2</sub>
 
 In order words, that the change (delta) in connection strength from neuron 1 to neuron 2 is the activation of the two neurons, multiplied together. G is a number less than one, which controls the overall rate of learning.
 
-Let's see how that works in practice.
-
-So, the first time the bell is rung, the dog doesn't expect food and so the connection strength is zero. But, both Bell and Food representations are active (1). Let's assume a learning rate (G) of 0.1. So the change in weight (delta) is 0.1 times 1 times 1, so 0.1. 
+Let's see how that works in practice. The first time the bell is rung, the dog doesn't expect food and so the connection strength is zero. But, both Bell and Food representations are active (1). Let's assume a learning rate (G) of 0.1. So the change in weight (delta) is 0.1 times 1 times 1, so 0.1. 
 
 As the two things repeatedly co-occur, the connection strength between them increases -- the network is learning. This seems to be OK for a while, but it has the odd property that the connection always gets stronger - there is no point at which learning is complete. 
 
@@ -130,7 +128,7 @@ So, learning tends to slow as it proceeds.
 
 In 1951 two psychologists expressed that idea in an equation.
 
-$\Delta w_{1,2} = G.(t - w_{1,2}$
+Δw<sub>1,2</sub> = G . (t - w<sub>1,2</sub>)
 
 Much of this equation is the same as before. It specifies delta w, the change in weight, w. G is a learning rate parameter, less than 1. 
 
@@ -140,9 +138,9 @@ The other new part is the activation of neuron 1 multipled by the connection str
 
 Let's look at that with the same example as before - Pavlov's dogs.
 
-On the first trial, we learn just as much as in Hebbian learning. The food is present, so neuron 2 should be active, so _t_ is 1. The bell rang, so a_{1} is 1. The connection starts at zero, so _w_ is zero. So the teacher predicts an activation of 1, but the student is producing an activation of zero. The difference is 1 (1 minus zero), and we multiply that by the learning rate, so we get 0.1 as the change in weight. So after the first trial, the weight goes up by 0.1.
+On the first trial, we learn just as much as in Hebbian learning. The food is present, so neuron 2 should be active, so _t_ is 1. The bell rang, so a<sub>1</sub> is 1. The connection starts at zero, so _w_ is zero. So the teacher predicts an activation of 1, but the student is producing an activation of zero. The difference is 1 (1 minus zero), and we multiply that by the learning rate, so we get 0.1 as the change in weight. So after the first trial, the weight goes up by 0.1.
 
-The system learns a bit less next time. t is still 1, as is a_1, but now the weight is .1, so the difference between student and teacher is 0.9 and the weight goes up by .09. 
+The system learns a bit less next time. t is still 1, as is a<sub>1</sub>, but now the weight is .1, so the difference between student and teacher is 0.9 and the weight goes up by .09. 
 
 Each time the bell is followed by food, the connection weight goes up a bit, but less than it did last time. Eventually, the student is now the master and the learning is complete.
 
@@ -194,7 +192,7 @@ So, around 15 years before I was born, the US Navy thought it was beginning to g
 
 There's an important distinction to make here. With the delta rule, a single-layer network has a mechanism by which it _will_ learn anything it _can_ learn. But what _can_ it learn? 
 
-Well, turns out, there are some relatively simple problems single-layer networks cannot learn. For example, say a menu says that the omlette comes with chips or salad. Which of these orders fits that rule?
+Well, turns out, there are some relatively simple problems single-layer networks cannot learn. For example, say a menu says that the omelette comes with chips or salad. Which of these orders fits that rule?
 
 1. Omelette and chips
 
@@ -232,9 +230,9 @@ The next part of the puzzle is ... how does the network learn these weights for 
 
 ## Backpropagation of error
 
-We might assume that we can use the same method as before - the delta rule (also known as Rescorla-Wagner theory). This works for the connections in blue - we know what the output should be (t), we know the prediction coming from the network ($\Sigma_{aw}$), and we know the activation of the neurons.
+We might assume that we can use the same method as before - the delta rule (also known as Rescorla-Wagner theory). This works for the connections in blue - we know what the output should be (t), we know the prediction coming from the network (Σ<sub>aw</sub>), and we know the activation of the neurons.
 
-The problem comes with the connections in red. How should we update these? What should the output of the hidden unit be? We don't know, because the hidden unit doesn't directly represent anything observable. The input units represent chips and salad, we can observe those. The output unit represents whether this is valid choice or not, we can give the network feedback about that so it can learn. But how do we give it feedback about what its hidden unit should be doing?
+The problem comes with the connections shown in red on the slides. How should we update these? What should the output of the hidden unit be? We don't know, because the hidden unit doesn't directly represent anything observable. The input units represent chips and salad, we can observe those. The output unit represents whether this is valid choice or not, we can give the network feedback about that so it can learn. But how do we give it feedback about what its hidden unit should be doing?
 
 The most common solution to this puzzle is called backpropagation of error. This is at the heart of most neural network systems in AI, so let's take it step by step.
 
@@ -252,7 +250,7 @@ And that is backpropagation of error - probably the single most important innova
 
 If you ask a psychologist, they'll probably say that backprop was invented by Rumelhart, Hinton & Williams in 1986. This is because these three people did more than any other to popularize the approach to psychologists. They also made some non-trivial contributions, which we'll come to later. However, the basic idea was known around the same time as Rosenblatt's early work -- it can be traced back to work in aerospace engineering done by Henry Kelley in 1960. It took another 14 years before anyone seemed to realise the same idea could be used to train multilayer neural networks - this idea was first published by Paul Werbos in his Ph.D. thesis in 1974. 
 
-Progress from this initial idea was slow, with the idea being picked up independently, not only by Rumelhart, Hinton & Williams in 1986 , but also by Parker, and by Yann LeCun, both in 1985. Although I've not made a detailed study, my guess is that the main thing that happened in that 'dead decade' was that computers suddenly got a lot faster and cheaper in the mid 80s, so it was possible for a wider range of people to play around with backprop and see what it could do in practice. This was in fact, to my mind, the most important contribution of Rumelhart and colleagues in this regard --- they showed the world that backprop could do useful work, that it worked _in practice_. They included their work in an enormously influential two-volume book called _Parallel Distributed Processing_. More than any other single source, this was responsible for psychologists adopting neural networks as models of human behaviour, in a field that became known as _connectionism_. When I decided to do a Ph.D. in 1994, connectionism was very much in vogue, and it was these two volumes that, along with my supervisor Ian McLaren, are largely responsible for where I did my Ph.D. and what I did it on.
+tProgress from this initial idea was slow, with the idea being picked up independently, not only by Rumelhart, Hinton & Williams in 1986 , but also by Parker, and by Yann LeCun, both in 1985. Although I've not made a detailed study, my guess is that the main thing that happened in that 'dead decade' was that computers suddenly got a lot faster and cheaper in the mid 80s, so it was possible for a wider range of people to play around with backprop and see what it could do in practice. This was in fact, to my mind, the most important contribution of Rumelhart and colleagues in this regard --- they showed the world that backprop could do useful work, that it worked _in practice_. They included their work in an enormously influential two-volume book called _Parallel Distributed Processing_. More than any other single source, this was responsible for psychologists adopting neural networks as models of human behaviour, in a field that became known as _connectionism_. When I decided to do a Ph.D. in 1994, connectionism was very much in vogue, and it was these two volumes that, along with my supervisor Ian McLaren, that were largely responsible for where I did my Ph.D. and what I did it on.
 
 ### Power and limitations of backprop
 
@@ -274,9 +272,9 @@ The power of that simple learning algorithm is that it will always find the solu
 
 The problem with multilayer networks is that the error surface is often more complex - in particular, they can have _local minima_, which means that, depending on where the network starts, it might not learn the mapping.
 
-In our first example, the network started with a relatively low weight, and it used gradient descent to continue to reduce the weight until any further change - increase or decrease - would have increased the error, and its stopped. It also found the solution, the error is the minimum possible error for the problem.
+In our first example, the network started with a relatively low weight, and it used gradient descent to continue to reduce the weight until any further change - increase or decrease - would have increased the error, and it stopped. It also found the solution, the error is the minimum possible error for the problem.
 
-However, in our second example, the network started with a somewhat higher weight. It "rolls downhill" as before, and it again reaches a point where any further change - increase or decrease - would increase error. It therefore stops. However, this is not the solution to the problem - the error is higher than it could be. We say that the network has got stuck in a local minimum. Although it's obvious to us that it it continued to decrease its weight, despite the increase in error, it would eventually find the best solution. But backpropagation (at least in its basic form) will not do that, and so it fails to learn.
+However, in our second example, the network started with a somewhat higher weight. It "rolls downhill" as before, and it again reaches a point where any further change - increase or decrease - would increase error. It therefore stops. However, this is not the solution to the problem - the error is higher than it could be. We say that the network has got stuck in a local minimum. Although it's obvious to us that it it continued to decrease its weight, despite the increase in error, it would eventually find the best solution,  backpropagation (at least in its basic form) will not do that, and so it fails to learn.
 
 How much of a problem local minima are depends a lot on how likely the network is to get trapped in them for things we actually want it to learn. One of the main contributions of Rumelhart, Hinton and Williams was to show that for a range of things that people can learn, the likelihood of a backprop net getting stuck in a local minimum was very low. These demonstrations were really important in convincing psychologists to consider connectionist models as accounts of human behaviour. However, this fairly quickly hit a couple of objections, which we'll cover next.
 
@@ -299,9 +297,9 @@ One fairly ironic thing is that, while backprop was largely responsible for brin
 
 ## Summary
 
-This brings us to the end of the first section of the course. We've seen how people have been interested in AI since at least Ancient Greece, and that by the middle of the 20th century we knew enough about the brain to start to build brain-like systems on a computer. These systems are composed of nodes, which have activation. The nodes are connected together with links, which have weights. Activation passes through the network via those weight connections. The nodes represent things, and the weights store knowledge about the relationship between those associations. In order to build an AI, we could in principle set each of those connections by hand, but this is not particularly practical in practice. Instead, we use learning rules so that the network can learn for itself. 
+This brings us to the end of the first section of the course. We've seen how people have been interested in AI since at least Ancient Greece, and that by the middle of the 20th century we knew enough about the brain to start to build brain-like systems on a computer. These systems are composed of nodes, which have activation. The nodes are connected together with links, which have weights. Activation passes through the network via those weighted connections. The nodes represent things, and the weights store knowledge about the association between those representations. In order to build an AI, we could in principle set each of those connections by hand, but this is not particularly practical in practice. Instead, we use learning rules so that the network can learn for itself. 
 
-We traced the development of learning rules from simple Hebbian learning ("cells that fire together wire together") through to the delta rule (aka Rescorla-Wagner). We noted that the delta rule will learn anything that can be represented in a single-layer network, and this discovery led to a lot of excitement in the late 1950s and early 1960s that we were on the verge of making an Artificial General Intelligence. However, it became apparent that the problem was much harder than it first appeared. Single-layer networks are limited in what they can learn, and in order to solve that problem one has to build mult-layer networks. Multilayer feedforward networks are very powerful - with enough hidden units they can represent any deterministic mapping between input and output. We can also get multilayer networks to learn those mappings for themselves by using backpropagation of error. Backprop is probably the single most important component of modern brain-inspired AI, but it also has some limitations. First, although, a multilayer network can represent any mapping, backprop is not guaranteed to find that mapping - it can become stuck in local minima. Second, while backprop is OK for the initial training of a network, it's problematic after that because backprop nets suffer from catastrophic interference - information learned later wipes out information learned earlier to a much greater degree that humans (except perhaps Homer Simpson). Finally, and somewhat ironically, backprop does things that seem unlikely to happen in the brain, so it moves these originally brain-inspired systems further away from their source of inspiration.
+We traced the development of learning rules from simple Hebbian learning ("cells that fire together wire together") through to the delta rule (aka Rescorla-Wagner). We noted that the delta rule will learn anything that can be represented in a single-layer network, and this discovery led to a lot of excitement in the late 1950s and early 1960s that we were on the verge of making an Artificial General Intelligence. However, it became apparent that the problem was much harder than it first appeared. Single-layer networks are limited in what they can learn, and in order to solve that problem one has to build multi-layer networks. Multilayer feedforward networks are very powerful - with enough hidden units they can represent any deterministic mapping between input and output. We can also get multilayer networks to learn those mappings for themselves by using backpropagation of error. Backprop is probably the single most important component of modern brain-inspired AI, but it also has some limitations. First, although, a multilayer network can represent any mapping, backprop is not guaranteed to find that mapping - it can become stuck in local minima. Second, while backprop is OK for the initial training of a network, it's problematic after that because backprop nets suffer from catastrophic interference - information learned later wipes out information learned earlier to a much greater degree that humans (except perhaps Homer Simpson). Finally, and somewhat ironically, backprop does things that seem unlikely to happen in the brain, so it moves these originally brain-inspired systems further away from their source of inspiration.
 
 ## Suggested further reading
 

@@ -4,6 +4,8 @@
 
 - 1997: IBM's Deep Blue computer beats world grandmaster Gary Kasparov at chess; the [BBC news clip](https://www.youtube.com/watch?v=KF6sLCeBj0s) marks the 20th anniversary of this success.
 
+- 2019: [Tesla's full self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo)
+
 - 2021: [Pig, dog, pig, dog, loaf of bread](https://www.youtube.com/watch?v=r2GjEvFUsYw) - In the 2021 film, [The Mitchells vs. The Machines](https://www.netflix.com/gb/title/81399614), an AI armageddon is averted in part through the limitations of AI object recognition. Current-day AI really is this bad at object recognition, at least sometimes. 
 
 ## Introduction
@@ -22,7 +24,7 @@ Ten years ago, a [paper](https://proceedings.neurips.cc/paper/2012/file/c399862d
 
 The multilayer networks we covered in the last section of the course are not that similar to the human visual system. 
 
-First, traditional networks are quite shallow, often with only one hidden layer, while the primate visual system has [many layers](van1992information.pdf)
+First, traditional networks are quite shallow, often with only one hidden layer, while the primate visual system has [many layers](van1992information.pdf).
 
 Second, traditional networks are _densely connected_, in other words, every neuron in layer 1 is connected to every neuron in layer 2 and so on. The brain is generally much more _sparsely_ connected - there are many fewer connections than in a densely connected system. 
 
@@ -38,13 +40,13 @@ In 1989, Yann LeCun and colleagues published what is generally considered to be 
 
 ### The convolutional filter
 
-At the heart of LeNet is the concept of the convolutional filter. Inspired by the structure of visual cortex, a convolutional filter has a receptive field - in our simple example a 2 x 2 square of pixels in a grayscale picture. A convolutional filter is just a single-layer network, like we studied before. It takes input from a number of units, four in our example, and this passes down connections of varying weight. The output unit sums all the inputs, and passes it through an activation function to produce an output. 
+At the heart of LeNet is the concept of the convolutional filter. Inspired by the structure of visual cortex, a convolutional filter has a receptive field - in our simple example on the slides,  a 2 x 2 square of pixels in a black and white picture. A convolutional filter is just a single-layer network, like we studied before. It takes input from a number of units, four in our example, and this passes down connections of varying weight. The output unit sums all the inputs, and passes it through an activation function to produce an output. 
 
-It's easier to see how this functions as a feature detector with a 3 x 3 receptive field. As shown in the example in class, one can come up with a set of weights that means the filter responds most strongly to a vertical line, less to a diagonal line, and not at all to a consistent luminance across its field. 
+It's easier to see how this functions as a feature detector with a 3 x 3 receptive field. As shown on the slides, one can come up with a set of weights that means the filter responds most strongly to a vertical line, less to a diagonal line, and not at all to a consistent luminance across its field. 
 
 So far, there's nothing new here. What makes a convolutional filter different to a standard single-layer network is that the same filter - the same set of weights - is used all across the image. 
 
-This makes the network dramatically more constrained. In a dense network with 256 inputs and 64 hidden units, there are 256 x 64 = 16,384 connections, each of which could take a different value. With a single 5 x 5 convolutional filter, there are just the 25 connection strengths of the filter. 
+This makes the network dramatically more constrained. In a dense network with 256 inputs and 16 hidden unit, there are 256 x 16 = 4,096 connections, each of which could take a different value. With a single 5 x 5 convolutional filter, there are just the 25 connection strengths of the filter.
 
 **Filter banks**: In the same way that different neurons in V1 have different tunings (different features they detect), so LeNet had multiple different filters - 12 filters, in fact.
 
@@ -122,14 +124,7 @@ What are those applications? It's hard to be sure, because while companies such 
 
 One thing we do know is that the convolutional neural networks we've discussed can be used to [automatically detect pornographic images](https://arxiv.org/pdf/1511.08899.pdf) (Moustafa, 2015), and so there's a reasonable chance facebook and other social media companies use CNNs in this way to block pornographic content. 
 
-An area where we know CNNs are used is in self-driving cars. In summer 2021, Tesla did a [3-hour live stream](https://www.youtube.com/watch?v=j0z4FweCy4M) on how the AI works in their AutoPilot system. If you can spare the time, watch the whole thing, it's amazing. The [self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo) we viewed in class was from 2019; the
-
-Sections particularly relevant to this course are:
-
-- Demo of [full self-driving](https://www.youtube.com/watch?v=j0z4FweCy4M&t=2814s) 
-
-- 2019: [Tesla's full self-driving demo (2019)](https://www.youtube.com/watch?v=tlThdr3O5Qo)
-
+An area where we know CNNs are used is in self-driving cars. In summer 2021, Tesla did a [3-hour live stream](https://www.youtube.com/watch?v=j0z4FweCy4M) on how the AI works in their AutoPilot system. If you can spare the time, watch the whole thing, it's amazing. The [self-driving demo](https://www.youtube.com/watch?v=tlThdr3O5Qo) we viewed in class was from 2019.
 
 ## Why so deep?
 
