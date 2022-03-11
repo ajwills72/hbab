@@ -8,7 +8,7 @@ The pre-session videos were:
 
 1. Robots from [Boston Dynamics](https://en.wikipedia.org/wiki/Boston_Dynamics) dancing.
 
-## Intrdouction
+## Introduction
 
 ### Goals 
 
