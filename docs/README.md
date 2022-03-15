@@ -16,6 +16,8 @@ If you’d like to know more about these topics, a great place to start would be
 
 - **Perception** - rise of the convolutional neural networks. [slides](perception.pdf), [notes](perception.md)
 
+- **Philosophy, including ethics**. [slides](ethics.pdf), [notes](ethics.md)
+
 ## Assessment 
 
 ### Main period
