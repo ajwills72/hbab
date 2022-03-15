@@ -81,18 +81,6 @@ Probably the most common reaction to all this The Big Red Button. In other words
 
 A related but more general problem is how to build a system that will remain 'good', rather than, for example, learn to suppress information. In an experiment in artificial evolution of robots, an 'genetic code' specifies the connections strenghts in the robots neural network. The robots most successful in locating 'food' in the environment get to sexually reproduce. Over time, this results - as you would expect - in robots that are better at finding the food. However, these robots also start off randomly emitting blue light. As the robots become better at finding food, the presence of blue light signals the location of the food, because robots are more likely to be near the food than far from it. However, the food is limited so randomly emitting blue light reduces the amount of food you get. The robots evolve to, largely speaking stop emitting blue light [primary source](https://www.pnas.org/doi/pdf/10.1073/pnas.0903152106).
  
- - Principles for AI ethics [Jobin et al., 2020](https://arxiv.org/pdf/1906.11668.pdf)
- 
- - Importance of open-source
-
- - The [control problem](https://en.wikipedia.org/wiki/AI_alignment): how does one ensure a superintelligent AI is benevolent?
-
-- Three laws of robotics
-
-- [Tay](https://en.wikipedia.org/wiki/Tay_(bot)) chatbot, designed to [tweet like a teenager](https://www.youtube.com/watch?v=v6sEcfxsF2E), learned from the tweets it received and [became a massive racist](https://www.youtube.com/watch?v=eTdyucscPnQ). 
-
-
-
 ### Benevolent AGI
 
 Assuming we can avoid building an AGI that acts towards our destruction, the consequences could still be large. What is the future of work, for example? [Agriculture](https://en.wikipedia.org/wiki/Agriculture) was a new technology around 200 human lifetimes (12,000 years) ago. 7 lifetimes ago (16th century), around 60% of people in Europe were farmers. Even 3 lifetimes ago (19th century), 40% were. Now it's less than 10%. What happened to all the farmers? Well, they found something else to do. How about typing pools? What jobs will AI technologies affect in the next three lifetimes? Or, indeed, the next 10-20 years? [news article](https://www.theguardian.com/us-news/2017/jun/26/jobs-future-automation-robots-skills-creative-health), [primary source](https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf). 
@@ -101,6 +89,15 @@ Assuming we can avoid building an AGI that acts towards our destruction, the con
 ## Further reading
 
 - [Ethics of artificial intelligence](https://en.wikipedia.org/wiki/Ethics_of_artificial_intelligence#Robot_rights)
+
+- Principles for AI ethics: [Jobin et al., 2020](https://arxiv.org/pdf/1906.11668.pdf)
+ 
+- The [control problem](https://en.wikipedia.org/wiki/AI_alignment): how does one ensure a superintelligent AI is benevolent?
+
+- [Three laws of robotics](https://en.wikipedia.org/wiki/Three_Laws_of_Robotics)
+
+- [Tay](https://en.wikipedia.org/wiki/Tay_(bot)) chatbot, designed to [tweet like a teenager](https://www.youtube.com/watch?v=v6sEcfxsF2E), learned from the tweets it received and [became a massive racist](https://www.youtube.com/watch?v=eTdyucscPnQ). 
+
 
 - [Leverhulme Centre for the Future of Intelligence](https://en.wikipedia.org/wiki/Leverhulme_Centre_for_the_Future_of_Intelligence)
 
