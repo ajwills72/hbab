@@ -14,7 +14,7 @@ Where I sourced the videos and images in this part of the course
 
 - [Homer Simpson, "Every time I learn something..."](https://www.youtube.com/watch?v=MNeWZwUn3x0)
 
-## Image sources
+### Image sources
 
 In order of appearance (roughly):
 
@@ -136,7 +136,21 @@ In order of appearance (roughly):
 
 - [Overfitting](https://medium.com/greyatom/what-is-underfitting-and-overfitting-in-machine-learning-and-how-to-deal-with-it-6803a989c76)
 
-## Demonstrations in keras
+- [GAN schematics](https://arxiv.org/pdf/1902.01824v1.pdf)
+
+- [Cray-2](https://upload.wikimedia.org/wikipedia/commons/8/81/Cray2.jpg)
+
+- [Herb Simon](https://www.thefamouspeople.com/profiles/herbert-simon-293.php)
+
+- [Kurzweil 250](http://b.matrixsynth.com/2013/04/kurzweil-250.html)
+
+- [Processor in a brain](https://1721181113.rsc.cdn77.org/data/images/full/31123/brain-computer-interfaces-ethics-that-policymakers-and-companies-should-consider.jpg)
+
+- [Sample PARRY conversation](https://yakbots.com/chatbot-history-the-parry-chatbot/)
+
+- [Cumberbatch as Turing](https://abcnews.go.com/Technology/imitation-game-life-legacy-alan-turing/story?id=27081472)
+
+### Demonstrations in keras
 
 - [Minimal XOR solving with backprop](https://github.com/conwayok/keras-xor-example/blob/master/keras-xor-example/train.py)
 
@@ -151,9 +165,18 @@ In order of appearance (roughly):
 
 - [Single neuron firing](https://www.youtube.com/watch?v=lhkK6jURljs)
 
-## Exercises
+## Running the philosophy/ethics session
 
-- Extinction
-- Over-expectation
-- Superconditioning
+I'd like this to be discursive but I hate the hackneyed "split into groups and discuss" format. Ugh. Let's aim for Socratic. I'll lead a discussion, but by asking questions and reflecting on the answers, playing people off each other. I think I can do that for maybe 30mins at a stretch. I have 100mins
 
+20 - Setup
+
+30 - Discussion 1
+
+(10 - break)
+
+20 - Setup
+
+30 - Discussion 2
+
+END
