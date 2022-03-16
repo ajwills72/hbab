@@ -27,6 +27,8 @@
 
 - [temporal difference learning](https://en.wikipedia.org/wiki/Temporal_difference_learning)
 
+### Notes on Sutton (1988)
+
 Will it rain on Saturday?
 
 State : Prediction
@@ -42,7 +44,7 @@ Many such sequences observed
 
 For each sequence the learner generates a set of predictions P1, P2, ... Pm, each of which is an estimate of z. 
 
-For simplicity in this example, each Pt is predicted from state xt. 
+In this example, each Pt is predicted from state xt. 
 
 And that prediction is calculated from weights, and the state so prediction P is dependent on the state at time t and the weights - P(xt, w)
 
@@ -55,3 +57,10 @@ The thing to notice, though, is that none of this can be done until the outcome 
 But it turns out you can do this as you go along by using the prediction on time step t+1 as the teaching signal for the prediction on time step t, and multiplying, not by x (input activation on timestep t), but by the sum of x from timestep 1 to the current timestep. It's wild, but the maths turns out exactly the same as the 'at the end' calculation if you do this. 
 
 Why bother? Because it saves on memory - you only have to store the sum of x, not each x. It also allows the computations to be spread over the time it takes to observe the sequence, rather than having to do them all at the end. 
+
+This is known as the TD(1) algorithm, indicating that every previous time step contributes equally to the weight change calculation. 
+
+As a variation, one can make more recent timesteps contribue more to the weight change on that timestep. In principle, one could use any decreasing function, but it's handy to use an exponential of the form lambda^(t-k) where 0 <= lambda <= 1. It's handy because you can work out the sum of x on the next time step by taking it on the previous timestep, multiplying by lambda and adding x on the current time step. This is known as the TD(lambda) algorithm.
+
+From this, we can see that TD(1) is a special case of TD(lambda), but also that another special case is TD(0), which reduces to just the delta rule with the actual outcome replaced by the next prediction. 
+
