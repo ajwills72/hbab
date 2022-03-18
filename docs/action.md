@@ -68,3 +68,14 @@ From this, we can see that TD(1) is a special case of TD(lambda), but also that 
 ### Notes on Tesauro (1991)
 This is the original TD-gammon paper, reaching the performance of a tournament-level human player.
 
+## Links
+
+- [wikipedia Backgammon page](https://en.wikipedia.org/wiki/Backgammon)
+
+- [Reinforcement Learning texbook - Sutton & Barto, 2020](http://incompleteideas.net/book/RLbook2020.pdf)
+
+- [TD gammon implementation on github](https://github.com/dellalibera/td-gammon)
+
+- [Expert player writes about TD-gammon](https://bkgm.com/books/Robertie-LearningFromTheMachine.html)
+
+- [IBM RS/6000 used for TD-gammon](https://en.wikipedia.org/wiki/IBM_RS/6000#Type_7007)
