@@ -64,3 +64,7 @@ As a variation, one can make more recent timesteps contribue more to the weight 
 
 From this, we can see that TD(1) is a special case of TD(lambda), but also that another special case is TD(0), which reduces to just the delta rule with the actual outcome replaced by the next prediction. 
 
+
+### Notes on Tesauro (1991)
+This is the original TD-gammon paper, reaching the performance of a tournament-level human player.
+
