@@ -20,6 +20,10 @@ If you’d like to know more about these topics, a great place to start would be
 
 ## Assessment 
 
+As this is a course on AI, I couldn't resist sharing a couple of examples of the GPT-3 AI system writing essays - for the [Guardian](https://www.theguardian.com/commentisfree/2020/sep/08/robot-wrote-this-article-gpt-3) newspaper, and as part of a [Medium](https://sauravkumr.medium.com/i-told-gpt-3-to-write-an-essay-about-the-future-of-ai-93c9d5f47e61) article. Make sure _you_ pass the Turing test and convince me your essay was written by a human! 
+
+More seriously, here's some extensive [essay guidance](essay-guidance.pdf) for these assessments.
+
 ### Main period
 
 1. Critically review the development of brain-like artificial intelligence systems for perception, from the Mark 1 Perceptron to modern convolutional networks. What innovations took us from one to the other? How did the systems improve, and what is still left to do?
@@ -32,8 +36,4 @@ If you’d like to know more about these topics, a great place to start would be
 
 2. One consequence of artificial intelligence research may be the development of autonomous weapons. What ethical and societal issues does this raise?
 
-## Other
 
-- **Action** - reinforcement Learning, from TD-Gammon to AlphaGo.
-
-- **Philosophy and ethics** - the future of work; rights and responsibilities; malevolent AI and the singularity.
